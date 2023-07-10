@@ -8,6 +8,7 @@ import { Register } from "./pages/Register";
 import { MyProperty } from "./pages/MyProperty";
 import { Peta } from "./pages/Peta";
 import { Page404 } from "./pages/Page404";
+import { CobaFirebase } from "./pages/CobaFirebase";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/my-property" element={<MyProperty />} />
         <Route path="/maps" element={<Peta />} />
         <Route path="/admin" element={<AdminPage />} />
+        <Route path="/coba" element={<CobaFirebase />} />
         <Route path="*" element={<Page404 />} />
       </Routes>
     </Router>
