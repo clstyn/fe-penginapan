@@ -8,6 +8,7 @@ import { Register } from "./pages/Register";
 import { MyProperty } from "./pages/MyProperty";
 import { PetaPenginapan } from "./pages/PetaPenginapan";
 import { PetaJalurEvakuasi } from "./pages/PetaJalurEvakuasi";
+import { PetaTikum } from "./pages/PetaTikum";
 import { Page404 } from "./pages/Page404";
 import { CobaFirebase } from "./pages/CobaFirebase";
 
@@ -24,6 +25,7 @@ function App() {
           path="/maps-rekomendasi-evakuasi"
           element={<PetaJalurEvakuasi />}
         />
+        <Route path="/maps-rekomendasi-tikum" element={<PetaTikum />} />
         <Route path="/admin" element={<AdminPage />} />
         <Route path="/coba" element={<CobaFirebase />} />
         <Route path="*" element={<Page404 />} />
