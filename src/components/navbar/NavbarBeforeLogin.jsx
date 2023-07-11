@@ -6,8 +6,16 @@ import Dropdown from "../common/Dropdown";
 export const NavbarBeforeLogin = () => {
   const menuNormal = [
     { id: 1, value: "BERANDA", linkTo: "/" },
-    { id: 2, value: "PETA", linkTo: "/maps" },
-    { id: 3, value: "LOGIN", linkTo: "/login" },
+    { id: 2, value: "PETA PENGINAPAN", linkTo: "/maps-penginapan" },
+    { id: 3, value: "PETA EVAKUASI", linkTo: "/maps-rekomendasi-evakuasi" },
+    { id: 4, value: "PETA TITIK KUMPUL", linkTo: "/maps-rekomendasi-tikum" },
+    { id: 5, value: "LOGIN", linkTo: "/login" },
+  ];
+
+  const menuPeta = [
+    { id: 1, value: "Peta Penginapan", linkTo: "/maps-penginapan" },
+    { id: 2, value: "Peta Evakuasi", linkTo: "/maps-rekomendasi-evakuasi" },
+    { id: 3, value: "Peta Titik Kumpul", linkTo: "/maps-rekomendasi-tikum" },
   ];
 
   return (
@@ -24,9 +32,13 @@ export const NavbarBeforeLogin = () => {
             </Link>
           </li>
           <li>
-            <Link to={"/maps"} className="hover:font-semibold mx-2">
+            <Dropdown
+              judul="PETA"
+              items={menuPeta}
+              className="hover:font-semibold mx-2"
+            >
               PETA
-            </Link>
+            </Dropdown>
           </li>
           <li>
             <Link to={"/login"} className="hover:font-semibold mx-2">

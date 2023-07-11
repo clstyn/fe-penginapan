@@ -8,16 +8,20 @@ export const NavbarAfterLogin = () => {
 
   const menuUser = [
     { id: 1, value: "BERANDA", linkTo: "/" },
-    { id: 2, value: "PETA", linkTo: "/maps" },
-    { id: 3, value: "PROPERTI SAYA", linkTo: "/my-property" },
-    { id: 4, value: "LOGOUT", linkTo: "/logout" },
+    { id: 2, value: "PETA PENGINAPAN", linkTo: "/maps-penginapan" },
+    { id: 3, value: "PETA EVAKUASI", linkTo: "/maps-rekomendasi-evakuasi" },
+    { id: 4, value: "PETA TITIK KUMPUL", linkTo: "/maps-rekomendasi-tikum" },
+    { id: 5, value: "PROPERTI SAYA", linkTo: "/my-property" },
+    { id: 6, value: "LOGOUT", linkTo: "/logout" },
   ];
 
   const menuAdmin = [
     { id: 1, value: "BERANDA", linkTo: "/" },
-    { id: 2, value: "PETA", linkTo: "/maps" },
-    { id: 3, value: "DAFTAR PENGGUNA", linkTo: "/admin" },
-    { id: 4, value: "LOGOUT", linkTo: "/logout" },
+    { id: 2, value: "PETA PENGINAPAN", linkTo: "/maps-penginapan" },
+    { id: 3, value: "PETA EVAKUASI", linkTo: "/maps-rekomendasi-evakuasi" },
+    { id: 4, value: "PETA TITIK KUMPUL", linkTo: "/maps-rekomendasi-tikum" },
+    { id: 5, value: "DAFTAR PENGGUNA", linkTo: "/admin" },
+    { id: 6, value: "LOGOUT", linkTo: "/logout" },
   ];
 
   return (

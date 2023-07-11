@@ -13,9 +13,13 @@ export default function Dropdown(props) {
 
   return (
     <Menu as="div" className="relative inline-block">
-      <Menu.Button onClick={toggleMenu}>
-        {menuOpen ? <HiX /> : <HiMenu />}
-      </Menu.Button>
+      {props.judul ? (
+        <Menu.Button>{props.judul}</Menu.Button>
+      ) : (
+        <Menu.Button onClick={toggleMenu}>
+          {menuOpen ? <HiX /> : <HiMenu />}
+        </Menu.Button>
+      )}
       <Transition
         as={Fragment}
         enter="transition ease-out duration-100"
@@ -25,7 +29,7 @@ export default function Dropdown(props) {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="absolute right-0 mt-2 w-36 z-50 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg focus:outline-none font-poppins text-c-dark-green">
+        <Menu.Items className="absolute right-0 mt-2 w-48 z-50 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg focus:outline-none font-poppins text-c-dark-green">
           <div className="px-1 py-1 ">
             {props.items.map((data) => {
               const { id, value, linkTo } = data;
