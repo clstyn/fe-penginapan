@@ -1,11 +1,90 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { BsFillSearchHeartFill } from "react-icons/bs";
 
 import { NavbarBeforeLogin } from "../components/navbar/NavbarBeforeLogin";
 import { Footer } from "../components/Footer";
+import { CardPenginapan } from "../components/CardPenginapan";
 
 export const Home = () => {
+  const [penginapan, setPenginapan] = useState([]);
+  const penginapanDummy = [
+    {
+      namaKost: "Nama Kost 2",
+      hargaPerMonth: 1200000,
+      totalRoom: 10,
+      bookedRoom: 1,
+      fasilitas: ["AC", "Wi-Fi"],
+      imgUrl:
+        "https://firebasestorage.googleapis.com/v0/b/palihan-penginapan-kkn.appspot.com/o/files%2Fcoba%2F3922687.jpg?alt=media",
+      phoneNo: "081234567890",
+      location: {
+        type: "Point",
+        coordinates: [110.052031, -7.891401],
+      },
+    },
+    {
+      namaKost: "Nama Kost 3",
+      hargaPerMonth: 1500000,
+      totalRoom: 12,
+      bookedRoom: 2,
+      fasilitas: ["AC", "TV", "Wi-Fi"],
+      imgUrl:
+        "https://firebasestorage.googleapis.com/v0/b/palihan-penginapan-kkn.appspot.com/o/files%2Fcoba%2F3922687.jpg?alt=media",
+      phoneNo: "081234567891",
+      location: {
+        type: "Point",
+        coordinates: [110.052031, -7.891401],
+      },
+    },
+    {
+      namaKost: "Nama Kost 4",
+      hargaPerMonth: 1800000,
+      totalRoom: 15,
+      bookedRoom: 3,
+      fasilitas: ["AC", "TV", "Wi-Fi", "Parking"],
+      imgUrl:
+        "https://firebasestorage.googleapis.com/v0/b/palihan-penginapan-kkn.appspot.com/o/files%2Fcoba%2F3922687.jpg?alt=media",
+      phoneNo: "081234567892",
+      location: {
+        type: "Point",
+        coordinates: [110.052031, -7.891401],
+      },
+    },
+    {
+      namaKost: "Nama Kost 4",
+      hargaPerMonth: 1800000,
+      totalRoom: 15,
+      bookedRoom: 3,
+      fasilitas: ["AC", "TV", "Wi-Fi", "Parking"],
+      imgUrl:
+        "https://firebasestorage.googleapis.com/v0/b/palihan-penginapan-kkn.appspot.com/o/files%2Fcoba%2F3922687.jpg?alt=media",
+      phoneNo: "081234567892",
+      location: {
+        type: "Point",
+        coordinates: [110.052031, -7.891401],
+      },
+    },
+    {
+      namaKost: "Nama Kost 4",
+      hargaPerMonth: 1800000,
+      totalRoom: 15,
+      bookedRoom: 3,
+      fasilitas: ["AC", "TV", "Wi-Fi", "Parking"],
+      imgUrl:
+        "https://firebasestorage.googleapis.com/v0/b/palihan-penginapan-kkn.appspot.com/o/files%2Fcoba%2F3922687.jpg?alt=media",
+      phoneNo: "081234567892",
+      location: {
+        type: "Point",
+        coordinates: [110.052031, -7.891401],
+      },
+    },
+  ];
+
+  useEffect(() => {
+    setPenginapan(penginapanDummy);
+  }, []);
+
   return (
     <div className="">
       <NavbarBeforeLogin />
@@ -54,17 +133,34 @@ export const Home = () => {
       </section>
 
       <section className="bg-c-light-cream min-h-screen flex items-center justify-center py-24 md:pt-32 text-c-black text-center font-righteous">
-        <div className="container mx-auto flex flex-col items-center justify-center gap-8 w-5/6 md:w-1/2">
+        <div className="container mx-auto flex flex-col items-center justify-center gap-8 w-5/6 md:w-2/3">
           <h1 className="text-c-black text-2xl md:text-3xl 2xl:text-5xl leading-none">
             Daftar Penginapan
           </h1>
-          <div className="font-poppins text-xl relative w-1/2">
-            <BsFillSearchHeartFill className="absolute left-4 top-3 md:top-3.5 w-4 h-4" />
+          <div className="font-poppins text-xl relative w-3/4 md:w-1/2">
+            <BsFillSearchHeartFill className="absolute left-4 top-3 w-4 h-4" />
             <input
               type="text"
               placeholder="Cari nama penginapan..."
-              className="w-full py-2 pl-4 pr-10 border border-gray-300 rounded-md outline-none text-sm md:text-2xl focus:border-c-dark-green pl-12"
+              className="w-full py-2 pl-10 pr-0 md:pr-10 border border-gray-300 rounded-md outline-none text-sm md:text-lg focus:border-c-dark-green pl-12"
             />
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+            {penginapan?.map((item, index) => {
+              return (
+                <CardPenginapan
+                  key={index}
+                  namaKost={item.namaKost}
+                  hargaPerMonth={item.hargaPerMonth}
+                  totalRoom={item.totalRoom}
+                  bookedRoom={item.bookedRoom}
+                  fasilitas={item.fasilitas}
+                  phoneNo={item.phoneNo}
+                  location={item.location}
+                  imgUrl={item.imgUrl}
+                />
+              );
+            })}
           </div>
         </div>
       </section>
