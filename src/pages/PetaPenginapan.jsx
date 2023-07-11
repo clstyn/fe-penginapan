@@ -3,25 +3,25 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
 export const PetaPenginapan = () => {
-  useEffect(() => {
-    var locations = [
-      [
-        "<div style='display:flex; flex-direction:column; width: 150px'><h1>Rifda Kos</h1> <img src='img/rifda kos.jpg'/></div>",
-        -7.891401,
-        110.052031,
-      ],
-      [
-        "<div style='display:flex; flex-direction:column; width: 150px'><h1>Kos Bu Jumadi</h1> <img src='img/kos bu jumadi.jpeg'/></div>",
-        -7.891683,
-        110.052852,
-      ],
-      [
-        "<div style='display:flex; flex-direction:column; width: 150px'><h1>Kos Pak Kusmono</h1> <img src='img/kusmono.jpg'/></div>",
-        -7.896528,
-        110.054949,
-      ],
-    ];
+  const locations = [
+    [
+      "<div style='display:flex; flex-direction:column; width: 150px'><h1>Rifda Kos</h1> <img src='img/rifda kos.jpg'/></div>",
+      -7.891401,
+      110.052031,
+    ],
+    [
+      "<div style='display:flex; flex-direction:column; width: 150px'><h1>Kos Bu Jumadi</h1> <img src='img/kos bu jumadi.jpeg'/></div>",
+      -7.891683,
+      110.052852,
+    ],
+    [
+      "<div style='display:flex; flex-direction:column; width: 150px'><h1>Kos Pak Kusmono</h1> <img src='img/kusmono.jpg'/></div>",
+      -7.896528,
+      110.054949,
+    ],
+  ];
 
+  useEffect(() => {
     var map = L.map("map").setView([-7.894894, 110.061906], 15);
     var mapLink = '<a href="http://openstreetmap.org">OpenStreetMap</a>';
     L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
