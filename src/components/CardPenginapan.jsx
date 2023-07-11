@@ -37,7 +37,7 @@ export const CardPenginapan = (props) => {
 
         <div className="flex items-center justify-between">
           <a
-            href="/"
+            href={``}
             className="bg-c-mid-green text-sm md:text-md 2xl:text-lg px-3 md:px-4 py-1 md:py-2 rounded-full text-c-light-cream font-semibold"
             target="_blank"
             rel="norefferer noopener"
