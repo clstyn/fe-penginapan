@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 
 import Dropdown from "../common/Dropdown";
 
-export const NavbarBeforeLogin = () => {
+export const NavbarAfterLogin = () => {
+  const [isAdmin, setIsAdmin] = useState(false);
+
   const menuUser = [
     { id: 1, value: "BERANDA", linkTo: "/" },
     { id: 2, value: "PETA", linkTo: "/maps" },
@@ -27,18 +29,41 @@ export const NavbarBeforeLogin = () => {
         <p className="font-righteous text-lg md:text-2xl">Penginapan.Palihan</p>
         <ul className="hidden md:flex gap-16 font-poppins text-xl">
           <li>
-            <Link to={"/"}>BERANDA</Link>
+            <Link to={"/"} className="hover:font-semibold mx-2">
+              BERANDA
+            </Link>
           </li>
           <li>
-            <Link to={"/maps"}>PETA</Link>
+            <Link to={"/maps"} className="hover:font-semibold mx-2">
+              PETA
+            </Link>
           </li>
+          {!isAdmin ? (
+            <li>
+              <Link to={"/my-property"} className="hover:font-semibold mx-2">
+                PROPERTI SAYA
+              </Link>
+            </li>
+          ) : (
+            <li>
+              <Link to={"/admin"} className="hover:font-semibold mx-2">
+                DAFTAR PENGGUNA
+              </Link>
+            </li>
+          )}
           <li>
-            <Link to={"/login"}>LOGIN</Link>
+            <Link to={"/"} className="hover:font-semibold mx-2">
+              LOGOUT
+            </Link>
           </li>
         </ul>
         <div className="md:hidden">
           <div className="cursor-pointer">
-            <Dropdown items={menuNormal} />
+            {!isAdmin ? (
+              <Dropdown items={menuUser} />
+            ) : (
+              <Dropdown items={menuAdmin} />
+            )}
           </div>
         </div>
       </div>
