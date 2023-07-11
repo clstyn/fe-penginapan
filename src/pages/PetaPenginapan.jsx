@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-
+//halo
 export const PetaPenginapan = () => {
   const locations = [
     [
