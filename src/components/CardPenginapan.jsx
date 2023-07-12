@@ -2,11 +2,11 @@ import React from "react";
 
 export const CardPenginapan = (props) => {
   return (
-    <div className="rounded-3xl w-3/4 md:w-full min-h-[350px] h-fit flex flex-col shadow-lg mx-auto">
+    <div className="rounded-3xl w-3/4 md:w-full min-h-[400px] h-fit flex flex-col shadow-lg mx-auto">
       <img
         src={props.imgUrl}
         alt={props.namaKost}
-        className="rounded-t-3xl w-full h-[168px] object-cover object-center"
+        className="rounded-t-3xl w-full h-1/2 min-h-[200px] object-cover object-center"
       />
       <div className="p-4 xl:p-8 font-poppins text-c-black flex flex-col gap-4 h-1/2">
         <div className="flex justify-between items-center w-full">
