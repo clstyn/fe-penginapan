@@ -28,7 +28,17 @@ export const Home = () => {
       hargaPerMonth: 1500000,
       totalRoom: 12,
       bookedRoom: 2,
-      fasilitas: ["AC", "TV", "Wi-Fi"],
+      fasilitas: [
+        "AC",
+        "TV",
+        "Wi-Fi",
+        "AC",
+        "TV",
+        "Wi-Fi",
+        "AC",
+        "TV",
+        "Wi-Fi",
+      ],
       imgUrl:
         "https://firebasestorage.googleapis.com/v0/b/palihan-penginapan-kkn.appspot.com/o/files%2Fcoba%2F3922687.jpg?alt=media",
       phoneNo: "081234567891",
@@ -81,6 +91,14 @@ export const Home = () => {
     },
   ];
 
+  const scrollSmoothTo = () => {
+    const targetSection = document.getElementById("penginapan");
+    targetSection.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
+
   useEffect(() => {
     setPenginapan(penginapanDummy);
   }, []);
@@ -103,7 +121,10 @@ export const Home = () => {
                 Kecamatan Temon, Kabupaten Kulonprogo
               </h1>
             </div>
-            <div className="cursor-pointer bg-c-mid-green rounded-full px-4 md:px-16 py-2 md:py-4 text-xl md:text-4xl font-righteous hover:bg-c-cream hover:text-c-mid-green hover:border-2 hover:border-c-mid-green transition">
+            <div
+              onClick={() => scrollSmoothTo()}
+              className="cursor-pointer bg-c-mid-green rounded-full px-4 md:px-16 py-2 md:py-4 text-xl md:text-4xl font-righteous hover:bg-c-cream hover:text-c-mid-green hover:border-2 hover:border-c-mid-green transition"
+            >
               Cari Sekarang
             </div>
           </div>
@@ -132,7 +153,10 @@ export const Home = () => {
         </div>
       </section>
 
-      <section className="bg-c-light-cream min-h-screen flex items-center justify-center py-24 md:pt-32 text-c-black text-center font-righteous">
+      <section
+        id="penginapan"
+        className="bg-c-light-cream min-h-screen flex items-center justify-center py-24 md:pt-32 text-c-black text-center font-righteous"
+      >
         <div className="container mx-auto flex flex-col items-center justify-center gap-8 w-5/6 md:w-2/3">
           <h1 className="text-c-black text-2xl md:text-3xl 2xl:text-5xl leading-none">
             Daftar Penginapan
