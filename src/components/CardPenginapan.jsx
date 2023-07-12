@@ -97,9 +97,9 @@ export const CardPenginapan = (props) => {
                   alt={props.namaKost}
                   className="mt-16 rounded-xl w-1/2 object-cover object-center"
                 />
-                <div className="flex flex-col items-start mt-16 text-black font-poppins text-left">
+                <div className="flex flex-col items-start mt-16 text-black font-poppins text-left w-full">
                   <p className="font-semibold text-lg md:text-xl 2xl:text-2xl">
-                    Fasilitas:
+                    Fasilitas:{" "}
                     {props.fasilitas.map((element, index) => {
                       return (
                         <span key={index} className="font-normal">
