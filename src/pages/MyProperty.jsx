@@ -72,8 +72,8 @@ export const MyProperty = () => {
   return (
     <div className="bg-c-light-cream font-poppins">
       <NavbarAfterLogin />
-      <div className="flex w-full items-center justify-center pt-16 md:pt-24 2xl:pt-36">
-        <div className="flex flex-col w-full px-24 gap-4">
+      <div className="flex w-full items-center justify-center pt-20 md:pt-24 2xl:pt-36">
+        <div className="flex flex-col w-full px-8 md:px-24 gap-4">
           <h1 className="text-black font-semibold text-2xl md:text-3xl 2xl:text-5xl">
             Selamat Datang
           </h1>
@@ -82,7 +82,7 @@ export const MyProperty = () => {
           </p>
           <div
             onClick={openModal}
-            className="rounded-xl bg-c-mid-green text-white cursor-pointer px-4 md:px-8 py-2 md:py-4 mt-4 w-fit text-lg md:text-xl mb-8"
+            className="rounded-xl bg-c-mid-green text-white cursor-pointer px-4 md:px-8 py-2 md:py-4 mt-4 w-fit text-sm md:text-xl mb-8"
           >
             Tambah Properti
           </div>
@@ -107,11 +107,11 @@ export const MyProperty = () => {
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <div className="absolute inset-0 bg-black opacity-50"></div>
 
-          <div className="bg-c-light-cream rounded-lg p-8 w-3/4 md:w-1/2 z-50">
-            <h2 className="text-xl font-semibold mb-4">Tambah Properti</h2>
+          <div className="bg-c-light-cream rounded-lg p-8 w-5/6 md:w-1/2 z-50 max-md:my-8 max-md:text-xs">
+            <h2 className="text-lg md:text-xl font-semibold mb-4">
+              Tambah Properti
+            </h2>
 
-            {/* Add Penginapan Form */}
-            {/* Replace with your form fields and styling */}
             <form>
               <div className="mb-4">
                 <label htmlFor="namaKost" className="block mb-1">
@@ -183,7 +183,7 @@ export const MyProperty = () => {
               </div>
               <div className="mb-4">
                 <label htmlFor="imgUrl" className="block mb-1">
-                  Unggah Gambar (Pilih 1 gambar)
+                  Unggah Gambar
                 </label>
                 <input
                   type="file"
@@ -197,7 +197,7 @@ export const MyProperty = () => {
                 </label>
                 <div
                   id="map"
-                  className="border border-gray-300 px-4 py-2 w-full h-[150px] rounded"
+                  className="border border-gray-300 px-4 py-2 w-full h-16 md:h-[150px] rounded"
                 ></div>
               </div>
               <div className="flex justify-end mt-8">
