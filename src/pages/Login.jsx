@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import { toast } from "react-toastify";
+import { AuthContext } from "../context/AuthContext";
 
 export const Login = () => {
+  const { login, userData, isLogged } = useContext(AuthContext);
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -15,27 +18,34 @@ export const Login = () => {
   };
 
   const handleSubmit = (event) => {
-    // event.preventDefault();
-    // fetch("https://pharmaweb14.herokuapp.com/api/auth/signin", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify(formData),
-    // })
-    //   .then(async (response) => {
-    //     const data = await response.json();
-    //     if (!response.ok) {
-    //       const error = (data && data.message) || response.status;
-    //       return Promise.reject(error);
-    //     }
-    //     localStorage.setItem("user", JSON.stringify(data.user));
-    //     localStorage.setItem("token", JSON.stringify(data.token));
-    //     toast.success("Selamat datang!");
-    //     setIsLoged(true);
-    //   })
-    //   .catch((error) => {
-    //     toast.error(error);
-    //   });
+    event.preventDefault();
+
+    fetch("https://be-penginapan.vercel.app/api/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(response.statusText);
+        }
+        return response.json();
+      })
+      .then((user) => {
+        localStorage.setItem("user", JSON.stringify(user.data));
+        localStorage.setItem("token", JSON.stringify(user.token));
+        toast.success("Selamat datang!");
+        login(user.data);
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
   };
+
+  useEffect(() => {
+    console.log(userData);
+    console.log(isLogged);
+  }, [userData, isLogged]);
 
   return (
     <div className="w-screen min-h-screen bg-c-dark-green flex flex-col items-center justify-center font-poppins">
