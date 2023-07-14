@@ -15,14 +15,14 @@ import { PetaTikum } from "./pages/PetaTikum";
 import { Page404 } from "./pages/Page404";
 import { CobaFirebase } from "./pages/CobaFirebase";
 
-import { AuthProvider } from "./context/AuthContext";
+import { AppProvider } from "./context/AppContext";
 
 function App() {
   return (
     <>
       <ToastContainer></ToastContainer>
       <Router>
-        <AuthProvider>
+        <AppProvider>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
@@ -38,7 +38,7 @@ function App() {
             <Route path="/coba" element={<CobaFirebase />} />
             <Route path="*" element={<Page404 />} />
           </Routes>
-        </AuthProvider>
+        </AppProvider>
       </Router>
     </>
   );
