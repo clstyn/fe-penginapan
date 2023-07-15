@@ -3,8 +3,8 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "@fortawesome/fontawesome-free/css/all.css";
 import { NavbarBeforeLogin } from "../components/navbar/NavbarBeforeLogin";
-import kompas from "../assets/images/kompas1.png"
-import Group25 from "../assets/images/Group25.png"
+import kompas from "../assets/images/kompas1.png";
+import Group25 from "../assets/images/Group25.png";
 
 export const PetaJalurEvakuasi = () => {
   var arrowDataCongot = [
@@ -40,7 +40,7 @@ export const PetaJalurEvakuasi = () => {
         ) *
           180) /
         Math.PI;
-      const htmlIconArrow = `<i class="fa fa-arrow-up" style="color:red; transform: rotate(${angle}deg); font-size: 15px;"></i>`;
+      const htmlIconArrow = `<i class="fa fa-arrow-up" style="color:red; transform: rotate(${angle}deg); font-size: 24px;"></i>`;
 
       var arrowIcon = L.divIcon({
         className: "arrow-marker",
@@ -71,7 +71,7 @@ export const PetaJalurEvakuasi = () => {
         ) *
           180) /
         Math.PI;
-      const htmlIconArrow1 = `<i class="fa fa-arrow-up" style="color:blue; transform: rotate(${angle}deg); font-size: 15px;"></i>`;
+      const htmlIconArrow1 = `<i class="fa fa-arrow-up" style="color:blue; transform: rotate(${angle}deg); font-size: 24px;"></i>`;
 
       var arrowIcon1 = L.divIcon({
         className: "arrow-marker",
@@ -101,7 +101,7 @@ export const PetaJalurEvakuasi = () => {
         ) *
           180) /
         Math.PI;
-      const htmlIconArrow2 = `<i class="fa fa-arrow-up" style="color:DeepPink; transform: rotate(${angle}deg); font-size: 15px;"></i>`;
+      const htmlIconArrow2 = `<i class="fa fa-arrow-up" style="color:DeepPink; transform: rotate(${angle}deg); font-size: 24px;"></i>`;
 
       var arrowIcon2 = L.divIcon({
         className: "arrow-marker",
@@ -129,7 +129,7 @@ export const PetaJalurEvakuasi = () => {
         ) *
           180) /
         Math.PI;
-      const htmlIconArrow3 = `<i class="fa fa-arrow-up" style="color:LimeGreen; transform: rotate(${angle}deg); font-size: 15px;"></i>`;
+      const htmlIconArrow3 = `<i class="fa fa-arrow-up" style="color:LimeGreen; transform: rotate(${angle}deg); font-size: 24px;"></i>`;
 
       var arrowIcon3 = L.divIcon({
         className: "arrow-marker",
@@ -157,7 +157,7 @@ export const PetaJalurEvakuasi = () => {
         ) *
           180) /
         Math.PI;
-      const htmlIconArrow4 = `<i class="fa fa-arrow-up" style="color:LimeGreen; transform: rotate(${angle}deg); font-size: 15px;"></i>`;
+      const htmlIconArrow4 = `<i class="fa fa-arrow-up" style="color:LimeGreen; transform: rotate(${angle}deg); font-size: 24px;"></i>`;
 
       var arrowIcon4 = L.divIcon({
         className: "arrow-marker",
@@ -170,7 +170,7 @@ export const PetaJalurEvakuasi = () => {
     }
 
     const htmlIconApotek =
-      '<i class="fas fa-briefcase-medical" style="color:#9F000F; font-size: 20px;"></i>';
+      '<i class="fas fa-briefcase-medical" style="color:#9F000F; font-size: 28px;"></i>';
 
     var iconApotek = L.divIcon({
       className: "apotek-marker",
@@ -201,7 +201,7 @@ export const PetaJalurEvakuasi = () => {
     });
 
     const htmlIconApotek2 =
-      '<i class="fas fa-briefcase-medical" style="color:#9F000F; font-size: 20px;"></i>';
+      '<i class="fas fa-briefcase-medical" style="color:#9F000F; font-size: 28px;"></i>';
     var iconApotek2 = L.divIcon({
       className: "apotek-marker",
       html: htmlIconApotek,
@@ -232,7 +232,7 @@ export const PetaJalurEvakuasi = () => {
     });
 
     const htmlIconApotek3 =
-      '<i class="fas fa-briefcase-medical" style="color:#9F000F; font-size: 20px;"></i>';
+      '<i class="fas fa-briefcase-medical" style="color:#9F000F; font-size: 28px;"></i>';
     var iconApotek3 = L.divIcon({
       className: "apotek-marker",
       html: htmlIconApotek,
@@ -263,7 +263,7 @@ export const PetaJalurEvakuasi = () => {
     });
 
     const htmlIconApotek4 =
-      '<i class="fas fa-briefcase-medical" style="color:#9F000F; font-size: 20px;"></i>';
+      '<i class="fas fa-briefcase-medical" style="color:#9F000F; font-size: 28px;"></i>';
     var iconApotek4 = L.divIcon({
       className: "apotek-marker",
       html: htmlIconApotek4,
@@ -293,7 +293,7 @@ export const PetaJalurEvakuasi = () => {
     });
 
     const htmlIconApotek5 =
-      '<i class="fas fa-briefcase-medical" style="color:#9F000F; font-size: 20px;"></i>';
+      '<i class="fas fa-briefcase-medical" style="color:#9F000F; font-size: 28px;"></i>';
     var iconApotek5 = L.divIcon({
       className: "apotek-marker",
       html: htmlIconApotek5,
@@ -362,18 +362,23 @@ export const PetaJalurEvakuasi = () => {
   return (
     <div className="relative flex flex-col w-screen h-screen">
       <NavbarBeforeLogin />
-      <div className="flex  items-center justify-center mt-24 mb-8 ">
-            <h2 className="text-center font-righteous text-2xl md:text-3xl 2xl:text-[64px] text-center">
-              Peta Rekomendasi Jalur Evakuasi
-            </h2>
-            <div className="absolute flex items-right justify-right right-8 mt-20 ">
-              <img class="w-40 h-40" src={kompas} alt="Kompas" />;
-            </div>
+      <div className="flex flex-col items-center justify-center mt-24 mb-8 ">
+        <h2 className="text-center font-righteous text-2xl md:text-3xl 2xl:text-[64px] text-center">
+          Peta Rekomendasi Jalur Evakuasi
+        </h2>
+        <div className="absolute flex items-right justify-right right-8 mt-2 ">
+          <img class="w-40 h-40" src={kompas} alt="Kompas" />;
+        </div>
+        <p class="text-[15px] mt-[34px] italic text-[#9D9797] font-poppins">
+          Zoom in atau Zoom out pada peta dengan tanda +- di pojok kiri atau
+          dengan kursor untuk menyesuaikan ukuran peta
+        </p>
       </div>
-      <div><p class="text-[15px] mt-[34px] ml-[277px] italic text-[#9D9797] font-poppins">Zoom in 
-      atau Zoom out pada peta dengan tanda +- di pojok kiri atau dengan kursor untuk menyesuaikan ukuran peta</p></div>
       <div id="map" className=" relative mt-2 w-full h-full z-10"></div>
-      <img src={Group25} class="absolute inset-0 w-[310px] h-[190px] ml-[50px] mt-[560px] object-cover rounded-lg z-20"></img>
+      <img
+        src={Group25}
+        class="absolute inset-0 w-[310px] h-[190px] ml-[50px] mt-[560px] object-cover rounded-lg z-20"
+      ></img>
     </div>
   );
 };
