@@ -18,7 +18,7 @@ export const CardPenginapan = (props) => {
       <img
         src={props.imgUrl}
         alt={props.namaKost}
-        className="rounded-t-3xl w-full h-1/2 min-h-[200px] object-cover object-center"
+        className="rounded-t-3xl w-full h-[200px] md:h-[260px] object-cover object-center"
       />
       <div className="p-4 xl:p-8 font-poppins text-c-black flex flex-col gap-4 h-1/2">
         <div className="flex justify-between items-center w-full">
@@ -36,7 +36,7 @@ export const CardPenginapan = (props) => {
         </div>
 
         <p className="font-semibold self-start text-xs md:text-sm xl:text-base">
-          mulai dari Rp {props.hargaPerMonth}
+          mulai dari Rp {props.hargaPerMonth.toLocaleString("id-ID")}
         </p>
         <p className="self-start text-xs md:text-sm xl:text-base">
           Total kamar: {props.totalRoom}
@@ -109,8 +109,10 @@ export const CardPenginapan = (props) => {
                     })}
                   </p>
                   <p className="font-semibold text-lg md:text-xl 2xl:text-2xl">
-                    Harga Sewa Per Bulan:{" "}
-                    <span className="font-normal">{props.hargaPerMonth}</span>
+                    Harga Mulai Dari:{" "}
+                    <span className="font-normal">
+                      {props.hargaPerMonth.toLocaleString("id-ID")}
+                    </span>
                   </p>
                   <p className="font-semibold text-lg md:text-xl 2xl:text-2xl">
                     Kamar kosong:{" "}

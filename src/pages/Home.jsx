@@ -1,95 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 
 import { BsFillSearchHeartFill } from "react-icons/bs";
 
 import { NavbarBeforeLogin } from "../components/navbar/NavbarBeforeLogin";
+import { NavbarAfterLogin } from "../components/navbar/NavbarAfterLogin";
 import { Footer } from "../components/Footer";
 import { CardPenginapan } from "../components/CardPenginapan";
+import { AppContext } from "../context/AppContext";
+
+import { staticData } from "../data/staticData";
 
 export const Home = () => {
   const [penginapan, setPenginapan] = useState([]);
-  const penginapanDummy = [
-    {
-      namaKost: "Nama Kost 2",
-      hargaPerMonth: 1200000,
-      totalRoom: 10,
-      bookedRoom: 1,
-      fasilitas: ["AC", "Wi-Fi"],
-      imgUrl:
-        "https://firebasestorage.googleapis.com/v0/b/palihan-penginapan-kkn.appspot.com/o/files%2Fcoba%2F3922687.jpg?alt=media",
-      phoneNo: "081234567890",
-      location: {
-        type: "Point",
-        coordinates: [110.052031, -7.891401],
-      },
-    },
-    {
-      namaKost: "Nama Kost 3",
-      hargaPerMonth: 1500000,
-      totalRoom: 12,
-      bookedRoom: 2,
-      fasilitas: [
-        "AC",
-        "TV",
-        "Wi-Fi",
-        "AC",
-        "TV",
-        "Wi-Fi",
-        "AC",
-        "TV",
-        "Wi-Fi",
-      ],
-      imgUrl:
-        "https://firebasestorage.googleapis.com/v0/b/palihan-penginapan-kkn.appspot.com/o/files%2Fcoba%2F3922687.jpg?alt=media",
-      phoneNo: "081234567891",
-      location: {
-        type: "Point",
-        coordinates: [110.052031, -7.891401],
-      },
-    },
-    {
-      namaKost: "Nama Kost 4",
-      hargaPerMonth: 1800000,
-      totalRoom: 15,
-      bookedRoom: 3,
-      fasilitas: ["AC", "TV", "Wi-Fi", "Parking"],
-      imgUrl:
-        "https://firebasestorage.googleapis.com/v0/b/palihan-penginapan-kkn.appspot.com/o/files%2Fcoba%2F3922687.jpg?alt=media",
-      phoneNo: "081234567892",
-      location: {
-        type: "Point",
-        coordinates: [110.052031, -7.891401],
-      },
-    },
-    {
-      namaKost: "Nama Kost 4",
-      hargaPerMonth: 1800000,
-      totalRoom: 15,
-      bookedRoom: 3,
-      fasilitas: ["AC", "TV", "Wi-Fi", "Parking"],
-      imgUrl:
-        "https://firebasestorage.googleapis.com/v0/b/palihan-penginapan-kkn.appspot.com/o/files%2Fcoba%2F3922687.jpg?alt=media",
-      phoneNo: "081234567892",
-      location: {
-        type: "Point",
-        coordinates: [110.052031, -7.891401],
-      },
-    },
-    {
-      namaKost: "Nama Kost 4",
-      hargaPerMonth: 1800000,
-      totalRoom: 15,
-      bookedRoom: 3,
-      fasilitas: ["AC", "TV", "Wi-Fi", "Parking"],
-      imgUrl:
-        "https://firebasestorage.googleapis.com/v0/b/palihan-penginapan-kkn.appspot.com/o/files%2Fcoba%2F3922687.jpg?alt=media",
-      phoneNo: "081234567892",
-      location: {
-        type: "Point",
-        coordinates: [110.052031, -7.891401],
-      },
-    },
-  ];
+  const { login, isLogged } = useContext(AppContext);
 
   const scrollSmoothTo = () => {
     const targetSection = document.getElementById("penginapan");
@@ -100,12 +23,19 @@ export const Home = () => {
   };
 
   useEffect(() => {
-    setPenginapan(penginapanDummy);
+    setPenginapan(staticData);
+  }, []);
+
+  useEffect(() => {
+    if (localStorage.getItem("user")) {
+      const user = JSON.parse(localStorage.getItem("user"));
+      login(user);
+    }
   }, []);
 
   return (
     <div className="">
-      <NavbarBeforeLogin />
+      {!isLogged ? <NavbarBeforeLogin /> : <NavbarAfterLogin />}
 
       <section className="bg-hero bg-cover min-h-screen flex items-center justify-center pt-36 md:pt-48 md:py-24 text-c-light-cream">
         <div className="container mx-auto max-md:px-12">

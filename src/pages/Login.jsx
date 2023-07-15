@@ -1,9 +1,10 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
+import { Navigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { AuthContext } from "../context/AuthContext";
+import { AppContext } from "../context/AppContext";
 
 export const Login = () => {
-  const { login, userData, isLogged } = useContext(AuthContext);
+  const { login, isLogged } = useContext(AppContext);
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -17,35 +18,37 @@ export const Login = () => {
     }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    fetch("https://be-penginapan.vercel.app/api/auth/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(response.statusText);
+    try {
+      const response = await fetch(
+        "https://be-penginapan.vercel.app/api/auth/login",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
         }
-        return response.json();
-      })
-      .then((user) => {
-        localStorage.setItem("user", JSON.stringify(user.data));
-        localStorage.setItem("token", JSON.stringify(user.token));
-        toast.success("Selamat datang!");
-        login(user.data);
-      })
-      .catch((error) => {
-        toast.error(error.message);
-      });
+      );
+
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.error);
+      }
+
+      const userData = await response.json();
+      localStorage.setItem("user", JSON.stringify(userData.data));
+      localStorage.setItem("token", JSON.stringify(userData.token));
+      toast.success("Selamat datang!");
+      login(userData.user);
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
-  useEffect(() => {
-    console.log(userData);
-    console.log(isLogged);
-  }, [userData, isLogged]);
+  if (isLogged) {
+    return <Navigate replace to="/" />;
+  }
 
   return (
     <div className="w-screen min-h-screen bg-c-dark-green flex flex-col items-center justify-center font-poppins">
