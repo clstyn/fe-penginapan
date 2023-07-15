@@ -29,7 +29,7 @@ export const CardPenginapan = (props) => {
             href={`https://www.google.com/maps/search/?api=1&query=${props.location.coordinates[1]},${props.location.coordinates[0]}`}
             target="_blank"
             rel="norefferer noopener"
-            className="hover:underline text-xs md:text-sm xl:text-base"
+            className="hover:underline text-xs md:text-sm 2xl:text-base"
           >
             Lokasi
           </a>
@@ -98,7 +98,7 @@ export const CardPenginapan = (props) => {
                   className="mt-16 rounded-xl md:w-1/2 object-cover object-center"
                 />
                 <div className="flex flex-col items-start md:mt-16 text-black font-poppins text-left w-full">
-                  <p className="font-semibold text-lg md:text-xl 2xl:text-2xl">
+                  <p className="font-semibold text-lg md:text-xl 2xl:text-2xl mb-4">
                     Fasilitas:{" "}
                     {props.fasilitas.map((element, index) => {
                       return (
@@ -108,13 +108,13 @@ export const CardPenginapan = (props) => {
                       );
                     })}
                   </p>
-                  <p className="font-semibold text-lg md:text-xl 2xl:text-2xl">
+                  <p className="font-semibold text-lg md:text-xl 2xl:text-2xl mb-4">
                     Harga Mulai Dari:{" "}
                     <span className="font-normal">
-                      {props.hargaPerMonth.toLocaleString("id-ID")}
+                      Rp {props.hargaPerMonth.toLocaleString("id-ID")}
                     </span>
                   </p>
-                  <p className="font-semibold text-lg md:text-xl 2xl:text-2xl">
+                  <p className="font-semibold text-lg md:text-xl 2xl:text-2xl mb-4">
                     Kamar kosong:{" "}
                     <span className="font-normal">
                       {props.totalRoom - props.bookedRoom}
