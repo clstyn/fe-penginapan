@@ -20,8 +20,7 @@ export const NavbarAfterLogin = () => {
     if (userData?.role === "admin") {
       setIsAdmin(true);
     }
-    console.log(isAdmin);
-  });
+  }, []);
 
   const menuUser = [
     { id: 1, value: "BERANDA", linkTo: "/" },

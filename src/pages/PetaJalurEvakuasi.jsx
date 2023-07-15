@@ -1,10 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
+
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "@fortawesome/fontawesome-free/css/all.css";
+
 import { NavbarBeforeLogin } from "../components/navbar/NavbarBeforeLogin";
+import { NavbarAfterLogin } from "../components/navbar/NavbarAfterLogin";
+
 import kompas from "../assets/images/kompas1.png";
 import Group25 from "../assets/images/Group25.png";
+import { AppContext } from "../context/AppContext";
 
 export const PetaJalurEvakuasi = () => {
   var arrowDataCongot = [
@@ -359,17 +364,26 @@ export const PetaJalurEvakuasi = () => {
     };
   }, []);
 
+  const { login, isLogged } = useContext(AppContext);
+
+  useEffect(() => {
+    if (localStorage.getItem("user")) {
+      const user = JSON.parse(localStorage.getItem("user"));
+      login(user);
+    }
+  }, []);
+
   return (
     <div className="relative flex flex-col w-screen h-screen">
-      <NavbarBeforeLogin />
+      {!isLogged ? <NavbarBeforeLogin /> : <NavbarAfterLogin />}
       <div className="flex flex-col items-center justify-center mt-24 mb-8 ">
         <h2 className="text-center font-righteous text-2xl md:text-3xl 2xl:text-[64px] text-center">
           Peta Rekomendasi Jalur Evakuasi
         </h2>
         <div className="absolute flex items-right justify-right right-8 mt-2 ">
-          <img class="w-40 h-40" src={kompas} alt="Kompas" />;
+          <img className="w-40 h-40" src={kompas} alt="Kompas" />;
         </div>
-        <p class="text-[15px] mt-[34px] italic text-[#9D9797] font-poppins">
+        <p className="text-[15px] mt-[34px] italic text-[#9D9797] font-poppins">
           Zoom in atau Zoom out pada peta dengan tanda +- di pojok kiri atau
           dengan kursor untuk menyesuaikan ukuran peta
         </p>
@@ -377,7 +391,7 @@ export const PetaJalurEvakuasi = () => {
       <div id="map" className=" relative mt-2 w-full h-full z-10"></div>
       <img
         src={Group25}
-        class="absolute inset-0 w-[310px] h-[190px] ml-[50px] mt-[560px] object-cover rounded-lg z-20"
+        className="absolute inset-0 w-[310px] h-[190px] ml-[50px] mt-[560px] object-cover rounded-lg z-20"
       ></img>
     </div>
   );

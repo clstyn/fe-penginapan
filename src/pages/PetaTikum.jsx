@@ -1,7 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+
+import { NavbarBeforeLogin } from "../components/navbar/NavbarBeforeLogin";
 import { NavbarAfterLogin } from "../components/navbar/NavbarAfterLogin";
+
+import { AppContext } from "../context/AppContext";
 
 export const PetaTikum = () => {
   const locations = [
@@ -82,17 +86,45 @@ export const PetaTikum = () => {
       map.remove();
     };
   }, []);
+
+  useEffect(() => {
+    if (localStorage.getItem("user")) {
+      const user = JSON.parse(localStorage.getItem("user"));
+      login(user);
+    }
+  }, []);
+
+  const { login, isLogged } = useContext(AppContext);
+
   return (
     <div className="">
-    <NavbarAfterLogin />
-    <div class="flex flex-col">
-      <div><p class="text-3xl mt-[100px] text-center font-semibold font-poppins">Peta Interaktif Rekomendasi Titik Kumpul</p></div>
-      <div><p class="text-[15px] mt-[34px] ml-[277px] italic text-[#9D9797] font-poppins">Zoom in atau Zoom out pada peta dengan tanda +- di pojok kiri atau dengan kursor untuk menyesuaikan ukuran peta</p></div>
-      <img src="img/image 7.png" class="absolute h-[173.25] w-[189px] mt-[97px] ml-[1355px] "></img>
-      <div class="relative">
-      <div id="map" className="w-[1026px] h-[505px] mt-[5px] ml-[276px] mr-[276px] rounded-lg z-10"></div>
-      <img src="img/Grup 26.png" class="absolute inset-0 w-[235.5px] h-[153.75px] ml-[300px] mt-[330px] object-cover rounded-lg z-20"></img>
-      </div>
+      {!isLogged ? <NavbarBeforeLogin /> : <NavbarAfterLogin />}
+      <div className="flex flex-col">
+        <div>
+          <p className="text-3xl mt-[100px] text-center font-semibold font-poppins">
+            Peta Interaktif Rekomendasi Titik Kumpul
+          </p>
+        </div>
+        <div>
+          <p className="text-[15px] mt-[34px] ml-[277px] italic text-[#9D9797] font-poppins">
+            Zoom in atau Zoom out pada peta dengan tanda +- di pojok kiri atau
+            dengan kursor untuk menyesuaikan ukuran peta
+          </p>
+        </div>
+        <img
+          src="img/image 7.png"
+          className="absolute h-[173.25] w-[189px] mt-[97px] ml-[1355px] "
+        ></img>
+        <div className="relative">
+          <div
+            id="map"
+            className="w-[1026px] h-[505px] mt-[5px] ml-[276px] mr-[276px] rounded-lg z-10"
+          ></div>
+          <img
+            src="img/Grup 26.png"
+            className="absolute inset-0 w-[235.5px] h-[153.75px] ml-[300px] mt-[330px] object-cover rounded-lg z-20"
+          ></img>
+        </div>
       </div>
     </div>
   );
