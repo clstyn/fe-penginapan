@@ -101,28 +101,28 @@ export const PetaTikum = () => {
       {!isLogged ? <NavbarBeforeLogin /> : <NavbarAfterLogin />}
       <div className="flex flex-col">
         <div>
-          <p className="text-3xl mt-[100px] text-center font-semibold font-poppins">
+          <p className="text-5xl mt-[115px] text-center font-semibold font-poppins">
             Peta Interaktif Rekomendasi Titik Kumpul
           </p>
         </div>
         <div>
-          <p className="text-[15px] mt-[34px] ml-[277px] italic text-[#9D9797] font-poppins">
+          <p className="text-[15px] mt-[50px] ml-[277px] italic text-[#9D9797] font-poppins">
             Zoom in atau Zoom out pada peta dengan tanda +- di pojok kiri atau
             dengan kursor untuk menyesuaikan ukuran peta
           </p>
         </div>
         <img
           src="img/image 7.png"
-          className="absolute h-[173.25] w-[189px] mt-[97px] ml-[1355px] "
+          className="absolute h-[198px] w-[216px] mt-[125px] ml-[2030px] "
         ></img>
         <div className="relative">
           <div
             id="map"
-            className="w-[1026px] h-[505px] mt-[5px] ml-[276px] mr-[276px] rounded-lg z-10"
+            className="w-[1692.6px] h-[830.8px] mt-[5px] ml-[276px] mr-[276px] rounded-lg z-10"
           ></div>
           <img
             src="img/Grup 26.png"
-            className="absolute inset-0 w-[235.5px] h-[153.75px] ml-[300px] mt-[330px] object-cover rounded-lg z-20"
+            className="absolute inset-0 w-[314px] h-[205px] ml-[315px] mt-[595px] object-cover rounded-lg z-20"
           ></img>
         </div>
       </div>
