@@ -1,32 +1,71 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { BsCheck } from "react-icons/bs";
+import { toast } from "react-toastify";
 
 import { NavbarAfterLogin } from "../components/navbar/NavbarAfterLogin";
 
+import { AppContext } from "../context/AppContext";
+
 export const AdminPage = () => {
   const [dataUser, setDataUser] = useState([]);
-  const dataDummy = [
-    {
-      id: 1,
-      nama: "John Doe",
-      alamat: "Jalan Contoh 123",
-      nik: "1234567890",
-      username: "johndoe",
-      aktivasi: "Aktif",
-    },
-    {
-      id: 2,
-      nama: "Jane Smith",
-      alamat: "Jalan Lain 456",
-      nik: "0987654321",
-      username: "janesmith",
-      aktivasi: "Aktif",
-    },
-  ];
+  const { login } = useContext(AppContext);
+  const navigate = useNavigate();
+
+  const fetchData = async () => {
+    try {
+      const token = JSON.parse(localStorage.getItem("token"));
+      const response = await fetch(
+        "https://be-penginapan.vercel.app/api/admin/get-users/",
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const data = await response.json();
+      setDataUser(data);
+    } catch (err) {
+      console.log(err);
+      toast.error(err);
+    }
+  };
 
   useEffect(() => {
-    setDataUser(dataDummy);
+    if (localStorage.getItem("user")) {
+      const user = JSON.parse(localStorage.getItem("user"));
+      login(user);
+      if (!(JSON.parse(localStorage.getItem("user")).role === "admin")) {
+        navigate("/");
+      }
+    } else {
+      navigate("/");
+    }
+    fetchData();
   }, []);
+
+  const handleActivate = async (targetId) => {
+    try {
+      const token = JSON.parse(localStorage.getItem("token"));
+      const response = await fetch(
+        `https://be-penginapan.vercel.app/api/admin/activate/${targetId}`,
+        {
+          method: "PATCH",
+          headers: {
+            Authorization: "Bearer " + token,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const data = await response.json();
+      toast.success(data.message);
+      fetchData();
+    } catch (err) {
+      console.log(err);
+      toast.error(err);
+    }
+  };
 
   return (
     <div className="bg-c-light-cream font-poppins min-h-screen max-xl:overflow-x-scroll">
@@ -38,9 +77,9 @@ export const AdminPage = () => {
           </h1>
           <p className="text-sm md:text-lg xl:text-2xl">
             Aktivasi akun pengguna dengan klik pada tombol
-            <div className="inline-block ml-2 md:ml-4 ">
+            <span className="inline-block ml-2 md:ml-4 ">
               <BsCheck className="bg-c-dark-green rounded-md w-4 h-4 md:w-6 md:h-6 text-white flex items-center justify-center" />
-            </div>
+            </span>
           </p>
           <table className="mt-12 md:mt-16 2xl:mt-24 text-sm md:text-lg xl:text-2xl drop-shadow-xl">
             <thead className="bg-c-light-green border-b-2 border-c-dark-green rounded-t-xl">
@@ -53,13 +92,24 @@ export const AdminPage = () => {
               </tr>
             </thead>
             <tbody>
-              {dataDummy.map((data) => (
-                <tr key={data.id} className="text-center bg-white">
-                  <td className="py-4">{data.nama}</td>
-                  <td className="py-4">{data.alamat}</td>
-                  <td className="py-4">{data.nik}</td>
+              {dataUser.map((data, index) => (
+                <tr key={index} className="text-center bg-white">
+                  <td className="py-4">{data.fullName}</td>
+                  <td className="py-4">{data.address}</td>
+                  <td className="py-4">{data.NIK}</td>
                   <td className="py-4">{data.username}</td>
-                  <td className="py-4">{data.aktivasi}</td>
+                  <td className="py-4">
+                    {data.isActive ? (
+                      "Sudah Aktif"
+                    ) : (
+                      <span
+                        onClick={() => handleActivate(data._id)}
+                        className="cursor-pointer inline-block ml-2 md:ml-4 "
+                      >
+                        <BsCheck className="bg-c-dark-green rounded-md w-4 h-4 md:w-6 md:h-6 text-white flex items-center justify-center" />
+                      </span>
+                    )}
+                  </td>
                 </tr>
               ))}
             </tbody>

@@ -14,6 +14,8 @@ import { PetaJalurEvakuasi } from "./pages/PetaJalurEvakuasi";
 import { PetaTikum } from "./pages/PetaTikum";
 import { Page404 } from "./pages/Page404";
 import { CobaFirebase } from "./pages/CobaFirebase";
+import { TambahProperti } from "./pages/TambahProperti";
+import { EditProperti } from "./pages/EditProperti";
 
 import { AppProvider } from "./context/AppContext";
 
@@ -36,6 +38,8 @@ function App() {
             <Route path="/maps-rekomendasi-tikum" element={<PetaTikum />} />
             <Route path="/admin" element={<AdminPage />} />
             <Route path="/coba" element={<CobaFirebase />} />
+            <Route path="/tambahkost" element={<TambahProperti />} />
+            <Route path="/editkost" element={<EditProperti />} />
             <Route path="*" element={<Page404 />} />
           </Routes>
         </AppProvider>

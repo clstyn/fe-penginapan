@@ -17,8 +17,10 @@ export const NavbarAfterLogin = () => {
   };
 
   useEffect(() => {
-    if (userData?.role === "admin") {
-      setIsAdmin(true);
+    if (localStorage.getItem("user")) {
+      if (JSON.parse(localStorage.getItem("user")).role === "admin") {
+        setIsAdmin(true);
+      }
     }
   }, []);
 
