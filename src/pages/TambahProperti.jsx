@@ -1,9 +1,34 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+import storage from "../firebase";
+import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
 export const TambahProperti = () => {
+  const navigate = useNavigate();
+
+  const [imgUrl, setImgUrl] = useState("");
+  const [location, setLocation] = useState([]);
+
+  const [formData, setFormData] = useState({
+    userId: "",
+    namaKost: "",
+    hargaPerMonth: 0,
+    totalRoom: 0,
+    fasilitas: [],
+    imgUrl: "",
+    phoneNo: "",
+    location: {
+      type: "Point",
+      coordinates: [],
+    },
+  });
+
+  const [progresspercent, setProgresspercent] = useState(0);
+
   useEffect(() => {
     var map = L.map("map").setView([-7.894894, 110.061906], 15);
     var mapLink = '<a href="http://openstreetmap.org">OpenStreetMap</a>';
@@ -17,6 +42,57 @@ export const TambahProperti = () => {
     };
   }, []);
 
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  useEffect(() => {
+    console.log(formData);
+  }, [formData]);
+
+  useEffect(() => {
+    setFormData((prevData) => ({
+      ...prevData,
+      imgUrl: imgUrl,
+    }));
+  }, [imgUrl]);
+
+  const uploadToFirebase = (file) => {
+    if (!file) return;
+    const storageRef = ref(storage, `files/kostUploads/${file.name}`);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        setProgresspercent(progress);
+      },
+      (error) => {
+        alert(error);
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          setImgUrl(downloadURL.split("&token=")[0]);
+        });
+      }
+    );
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const imageUploaded = e.target
+      .querySelectorAll("div")[7]
+      .querySelector("input");
+    const file = imageUploaded?.files[0];
+    uploadToFirebase(file);
+  };
+
   return (
     <div className="flex items-center justify-center min-h-screen w-screen bg-hero bg-cover">
       <div className="bg-c-light-cream rounded-lg p-8 w-5/6 md:w-1/2 z-50 max-md:my-8 max-md:text-xs">
@@ -24,13 +100,16 @@ export const TambahProperti = () => {
           Tambah Properti
         </h2>
 
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label htmlFor="namaKost" className="block mb-1">
               Nama Properti
             </label>
             <input
               type="text"
+              name="namaKost"
+              value={formData.namaKost}
+              onChange={handleChange}
               id="namaKost"
               className="border border-gray-300 px-4 py-2 w-full rounded"
               placeholder="Nama Kost/Homestay/Penginapan"
@@ -41,7 +120,10 @@ export const TambahProperti = () => {
               Harga/Rate
             </label>
             <input
-              type="text"
+              type="number"
+              name="hargaPerMonth"
+              value={formData.hargaPerMonth}
+              onChange={handleChange}
               id="hargaPerMonth"
               className="border border-gray-300 px-4 py-2 w-full rounded"
               placeholder="Harga Sewa per Bulan"
@@ -54,6 +136,9 @@ export const TambahProperti = () => {
               </label>
               <input
                 type="number"
+                name="totalRoom"
+                value={formData.totalRoom}
+                onChange={handleChange}
                 id="totalRoom"
                 className="border border-gray-300 px-4 py-2 w-full rounded"
                 placeholder="Jumlah total kamar"
@@ -65,6 +150,9 @@ export const TambahProperti = () => {
               </label>
               <input
                 type="number"
+                name="bookedRoom"
+                value={formData.bookedRoom}
+                onChange={handleChange}
                 id="bookedRoom"
                 className="border border-gray-300 px-4 py-2 w-full rounded"
                 placeholder="Jumlah kamar yang terisi"
@@ -77,6 +165,9 @@ export const TambahProperti = () => {
             </label>
             <input
               type="text"
+              name="phoneNo"
+              value={formData.phoneNo}
+              onChange={handleChange}
               id="phoneNo"
               className="border border-gray-300 px-4 py-2 w-full rounded"
               placeholder="Nomor telepon yang terhubung dengan WhatsApp"
@@ -88,6 +179,7 @@ export const TambahProperti = () => {
             </label>
             <input
               type="text"
+              //   onChange={setFasilitas}
               id="fasilitas"
               className="border border-gray-300 px-4 py-2 w-full rounded"
               placeholder="Sebutkan fasilitas yang tersedia. Dipisahkan dengan koma. Misalnya AC, Wi-Fi, Kamar Mandi Dalam"
@@ -100,8 +192,9 @@ export const TambahProperti = () => {
             <input
               type="file"
               id="imgUrl"
-              className="border border-gray-300 px-4 py-2 w-full rounded"
+              className="unggah-gambar border border-gray-300 px-4 py-2 w-full rounded"
             />
+            <p className="mt-2 ml-4">{progresspercent}%</p>
           </div>
           <div className="mb-4">
             <label htmlFor="map" className="block mb-1">
@@ -109,11 +202,12 @@ export const TambahProperti = () => {
             </label>
             <div
               id="map"
-              className="border border-gray-300 px-4 py-2 w-full h-16 md:h-[150px] rounded"
+              className="border border-gray-300 px-4 py-2 w-full h-16 md:h-[240px] rounded"
             ></div>
           </div>
           <div className="flex justify-end mt-8">
             <button
+              onClick={() => navigate("/my-property")}
               type="button"
               className="mr-2 bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded"
             >

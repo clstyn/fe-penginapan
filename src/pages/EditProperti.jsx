@@ -1,9 +1,12 @@
 import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
 export const EditProperti = () => {
+  const navigate = useNavigate();
+
   useEffect(() => {
     var map = L.map("map").setView([-7.894894, 110.061906], 15);
     var mapLink = '<a href="http://openstreetmap.org">OpenStreetMap</a>';
@@ -117,6 +120,7 @@ export const EditProperti = () => {
           </div>
           <div className="flex justify-end mt-8">
             <button
+              onClick={() => navigate("/my-property")}
               type="button"
               className="mr-2 bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded"
             >

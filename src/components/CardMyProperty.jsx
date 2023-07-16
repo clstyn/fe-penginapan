@@ -19,11 +19,11 @@ export const CardMyProperty = (props) => {
             {props?.property.namaKost}
           </p>
           <div className="flex gap-1">
-            <div className="cursor-pointer w-10 aspect-square bg-orange-400 hover:bg-orange-500 rounded-lg flex items-center justify-center text-white">
-              <FaEdit
-                onClick={() => navigate("/editkost")}
-                className="text-xl"
-              />
+            <div
+              onClick={() => navigate("/editkost")}
+              className="cursor-pointer w-10 aspect-square bg-orange-400 hover:bg-orange-500 rounded-lg flex items-center justify-center text-white"
+            >
+              <FaEdit className="text-xl" />
             </div>
             <div className="cursor-pointer w-10 aspect-square bg-red-500 hover:bg-red-600 rounded-lg flex items-center justify-center text-white">
               <RiDeleteBinLine className="text-xl" />

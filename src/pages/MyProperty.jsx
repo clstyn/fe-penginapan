@@ -7,7 +7,6 @@ import { CardMyProperty } from "../components/CardMyProperty";
 
 export const MyProperty = () => {
   const [myProperty, setMyProperty] = useState([]);
-  const [location, setLocation] = useState([]);
 
   const navigate = useNavigate();
 
@@ -44,7 +43,7 @@ export const MyProperty = () => {
 
   useEffect(() => {
     setMyProperty(MyPropertyDummy);
-  }, [MyPropertyDummy]);
+  }, []);
 
   return (
     <div className="bg-c-light-cream font-poppins">

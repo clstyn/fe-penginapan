@@ -381,7 +381,7 @@ export const PetaJalurEvakuasi = () => {
           Peta Rekomendasi Jalur Evakuasi
         </h2>
         <div className="absolute flex items-right justify-right right-8 mt-2 ">
-          <img className="w-40 h-40" src={kompas} alt="Kompas" />;
+          <img className="w-40 h-40" src={kompas} alt="Kompas" />
         </div>
         <p className="text-[15px] mt-[34px] italic text-[#9D9797] font-poppins">
           Zoom in atau Zoom out pada peta dengan tanda +- di pojok kiri atau
