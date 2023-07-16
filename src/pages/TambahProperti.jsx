@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 import storage from "../firebase";
@@ -10,8 +10,9 @@ import "leaflet/dist/leaflet.css";
 export const TambahProperti = () => {
   const navigate = useNavigate();
 
+  const pinRef = useRef(null);
+
   const [imgUrl, setImgUrl] = useState("");
-  const [location, setLocation] = useState([]);
 
   const [formData, setFormData] = useState({
     userId: "",
@@ -36,6 +37,45 @@ export const TambahProperti = () => {
       attribution: "&copy; " + mapLink + " Contributors",
       maxZoom: 18,
     }).addTo(map);
+
+    const handleMapClick = (ev) => {
+      var lat = ev.latlng.lat;
+      var lng = ev.latlng.lng;
+
+      console.log(lat);
+      console.log(lng);
+
+      var myIcon = L.icon({
+        iconUrl: "/img/hr.png",
+        iconSize: [30, 35], // size of the icon
+      });
+
+      if (!pinRef.current) {
+        pinRef.current = L.marker(ev.latlng, {
+          icon: myIcon,
+          riseOnHover: true,
+          draggable: true,
+        });
+        pinRef.current.addTo(map);
+
+        pinRef.current.on("drag", (ev) => {
+          lat = ev.latlng.lat;
+          lng = ev.latlng.lng;
+        });
+      } else {
+        pinRef.current.setLatLng(ev.latlng);
+      }
+
+      setFormData((prevData) => ({
+        ...prevData,
+        location: {
+          type: "Point",
+          coordinates: [lng, lat],
+        },
+      }));
+    };
+
+    map.on("click", handleMapClick);
 
     return () => {
       map.remove();
@@ -91,6 +131,17 @@ export const TambahProperti = () => {
       .querySelector("input");
     const file = imageUploaded?.files[0];
     uploadToFirebase(file);
+  };
+
+  const setFacilities = (e) => {
+    const { value } = e.target;
+
+    const fasilitasArray = value.split(",").map((item) => item.trim());
+
+    setFormData((prevData) => ({
+      ...prevData,
+      fasilitas: fasilitasArray,
+    }));
   };
 
   return (
@@ -179,7 +230,7 @@ export const TambahProperti = () => {
             </label>
             <input
               type="text"
-              //   onChange={setFasilitas}
+              onBlur={setFacilities}
               id="fasilitas"
               className="border border-gray-300 px-4 py-2 w-full rounded"
               placeholder="Sebutkan fasilitas yang tersedia. Dipisahkan dengan koma. Misalnya AC, Wi-Fi, Kamar Mandi Dalam"
