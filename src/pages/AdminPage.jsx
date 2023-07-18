@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { BsCheck } from "react-icons/bs";
 import { toast } from "react-toastify";
 
@@ -9,7 +9,7 @@ import { AppContext } from "../context/AppContext";
 
 export const AdminPage = () => {
   const [dataUser, setDataUser] = useState([]);
-  const { login } = useContext(AppContext);
+  const { isLogged } = useContext(AppContext);
   const navigate = useNavigate();
 
   const fetchData = async () => {
@@ -27,23 +27,16 @@ export const AdminPage = () => {
       const data = await response.json();
       setDataUser(data);
     } catch (err) {
-      console.log(err);
       toast.error(err);
     }
   };
 
   useEffect(() => {
-    if (localStorage.getItem("user")) {
-      const user = JSON.parse(localStorage.getItem("user"));
-      login(user);
-      if (!(JSON.parse(localStorage.getItem("user")).role === "admin")) {
-        navigate("/");
-      }
-    } else {
+    if (!(JSON.parse(localStorage.getItem("user")).role === "admin")) {
       navigate("/");
     }
     fetchData();
-  }, []);
+  });
 
   const handleActivate = async (targetId) => {
     try {
@@ -66,6 +59,10 @@ export const AdminPage = () => {
       toast.error(err);
     }
   };
+
+  if (!isLogged) {
+    return <Navigate to="/" />;
+  }
 
   return (
     <div className="bg-c-light-cream font-poppins min-h-screen max-xl:overflow-x-scroll">

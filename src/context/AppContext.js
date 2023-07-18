@@ -1,8 +1,10 @@
-import React, { createContext, useReducer, useEffect } from "react";
+import React, { createContext, useReducer } from "react";
+
+const token = JSON.parse(localStorage.getItem("token")) || null;
 
 const initialState = {
-  isLogged: false,
-  userData: null,
+  isLogged: !!token,
+  userData: JSON.parse(localStorage.getItem("user")) || null,
   myPropertyData: null,
 };
 

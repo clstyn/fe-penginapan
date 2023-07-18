@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 
 export const Register = () => {
   const [formData, setFormData] = useState({
@@ -19,26 +20,30 @@ export const Register = () => {
   };
 
   const handleSubmit = (event) => {
-    // event.preventDefault();
-    // fetch("https://pharmaweb14.herokuapp.com/api/auth/signin", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify(formData),
-    // })
-    //   .then(async (response) => {
-    //     const data = await response.json();
-    //     if (!response.ok) {
-    //       const error = (data && data.message) || response.status;
-    //       return Promise.reject(error);
-    //     }
-    //     localStorage.setItem("user", JSON.stringify(data.user));
-    //     localStorage.setItem("token", JSON.stringify(data.token));
-    //     toast.success("Selamat datang!");
-    //     setIsLoged(true);
-    //   })
-    //   .catch((error) => {
-    //     toast.error(error);
-    //   });
+    event.preventDefault();
+
+    if (formData.password != formData.repeatPassword) {
+      toast.error("Password dan password yang diulang harus sama");
+      return;
+    }
+
+    fetch("https://pharmaweb14.herokuapp.com/api/auth/signup/", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    })
+      .then(async (response) => {
+        if (!response.ok) {
+          const data = await response.json();
+          throw new Error(data.error);
+        }
+
+        const data = await response.json();
+        toast.success(data.message);
+      })
+      .catch((error) => {
+        toast.error(error);
+      });
   };
 
   return (
