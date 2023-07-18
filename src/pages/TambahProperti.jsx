@@ -1,5 +1,6 @@
-import React, { useEffect, useState, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState, useRef, useContext } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import storage from "../firebase";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
@@ -7,18 +8,25 @@ import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
+import { AppContext } from "../context/AppContext";
+
 export const TambahProperti = () => {
+  const { login } = useContext(AppContext);
+  const [isAdded, setIsAdded] = useState(false);
+  const [imgUrl, setImgUrl] = useState("");
+
   const navigate = useNavigate();
 
   const pinRef = useRef(null);
 
-  const [imgUrl, setImgUrl] = useState("");
+  // const [imgUrl, setImgUrl] = useState("");
 
   const [formData, setFormData] = useState({
     userId: "",
     namaKost: "",
     hargaPerMonth: 0,
     totalRoom: 0,
+    bookedRoom: 0,
     fasilitas: [],
     imgUrl: "",
     phoneNo: "",
@@ -42,12 +50,9 @@ export const TambahProperti = () => {
       var lat = ev.latlng.lat;
       var lng = ev.latlng.lng;
 
-      console.log(lat);
-      console.log(lng);
-
       var myIcon = L.icon({
         iconUrl: "/img/hr.png",
-        iconSize: [30, 35], // size of the icon
+        iconSize: [30, 35],
       });
 
       if (!pinRef.current) {
@@ -124,13 +129,40 @@ export const TambahProperti = () => {
     );
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const imageUploaded = e.target
       .querySelectorAll("div")[7]
       .querySelector("input");
     const file = imageUploaded?.files[0];
-    uploadToFirebase(file);
+
+    try {
+      uploadToFirebase(file);
+      const token = JSON.parse(localStorage.getItem("token"));
+      const response = await fetch(
+        "https://be-penginapan.vercel.app/api/penginapan/",
+        {
+          method: "POST",
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            Authorization: "Bearer " + token,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
+
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.error);
+      }
+
+      const data = await response.json();
+      toast.success(data.message);
+      setIsAdded(true);
+    } catch (err) {
+      toast.error(err);
+    }
   };
 
   const setFacilities = (e) => {
@@ -143,6 +175,24 @@ export const TambahProperti = () => {
       fasilitas: fasilitasArray,
     }));
   };
+
+  useEffect(() => {
+    if (localStorage.getItem("user")) {
+      const user = JSON.parse(localStorage.getItem("user"));
+      const id = JSON.parse(localStorage.getItem("user"))._id;
+      login(user);
+      setFormData((prevData) => ({
+        ...prevData,
+        userId: id,
+      }));
+    } else {
+      navigate("/");
+    }
+  }, []);
+
+  if (isAdded) {
+    return <Navigate replace to="/my-property" />;
+  }
 
   return (
     <div className="flex items-center justify-center min-h-screen w-screen bg-hero bg-cover">
