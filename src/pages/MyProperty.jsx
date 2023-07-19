@@ -10,12 +10,14 @@ import { AppContext } from "../context/AppContext";
 
 export const MyProperty = () => {
   const { isLogged, userData, login } = useContext(AppContext);
+  const [loading, setLoading] = useState(false);
   const [myProperty, setMyProperty] = useState([]);
 
   const navigate = useNavigate();
 
   const fetchData = async () => {
     try {
+      setLoading(true);
       const token = JSON.parse(localStorage.getItem("token"));
       const userId = userData?._id;
       const response = await fetch(
@@ -35,11 +37,12 @@ export const MyProperty = () => {
       setMyProperty(dataRes.data);
     } catch (err) {
       toast.error(err);
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleDelete = async (kostId) => {
-    //put logic to show delete confirmation popup here
     try {
       const token = JSON.parse(localStorage.getItem("token"));
       const response = await fetch(
@@ -96,6 +99,11 @@ export const MyProperty = () => {
           >
             Tambah Properti
           </div>
+          {loading ? (
+            <div className="flex items-center justify-center text-lg xl:text-3xl">
+              Loading data...
+            </div>
+          ) : null}
           <div className="flex flex-col gap-8 mb-12 md:mb-16 2xl:mb-24">
             {myProperty?.map((item, index) => {
               return (

@@ -15,6 +15,7 @@ export const TambahProperti = () => {
   const [isAdded, setIsAdded] = useState(false);
   const [imgUrl, setImgUrl] = useState("");
   const [errorText, setErrorText] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -134,6 +135,7 @@ export const TambahProperti = () => {
     // const file = imageUploaded?.files[0];
 
     try {
+      setLoading(true);
       if (
         !formData.namaKost ||
         formData.hargaPerMonth === 0 ||
@@ -173,6 +175,8 @@ export const TambahProperti = () => {
       toast.error(err);
       setErrorText(err.message);
       console.log(err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -336,7 +340,7 @@ export const TambahProperti = () => {
               type="submit"
               className="bg-c-mid-green hover:bg-c-dark-green text-white font-semibold py-2 px-4 rounded"
             >
-              Tambahkan
+              {loading ? "Loading..." : "Tambahkan"}
             </button>
           </div>
         </form>

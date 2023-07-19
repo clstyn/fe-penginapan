@@ -22,6 +22,7 @@ export const EditProperti = () => {
   const [isAdded, setIsAdded] = useState(false);
   const [imgUrl, setImgUrl] = useState("");
   const [progresspercent, setProgresspercent] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   const pinRef = useRef(null);
 
@@ -176,6 +177,7 @@ export const EditProperti = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setLoading(true);
       if (
         !property.namaKost ||
         property.hargaPerMonth === 0 ||
@@ -212,6 +214,8 @@ export const EditProperti = () => {
       toast.error(err);
       setErrorText(err.message);
       console.log(err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -357,7 +361,7 @@ export const EditProperti = () => {
               type="submit"
               className="bg-c-mid-green hover:bg-c-dark-green text-white font-semibold py-2 px-4 rounded"
             >
-              Simpan Perubahan
+              {loading ? "Loading..." : "Simpan Perubahan"}
             </button>
           </div>
         </form>

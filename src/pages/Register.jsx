@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 
 export const Register = () => {
   const [isDone, setIsDone] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     fullname: "",
     username: "",
@@ -21,36 +22,50 @@ export const Register = () => {
     }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    if (
+      !formData.fullname ||
+      !formData.username ||
+      !formData.address ||
+      !formData.NIK ||
+      !formData.password ||
+      !formData.repeatPassword
+    ) {
+      throw new Error("Isi semua isian dengan benar");
+    }
 
     if (formData.password !== formData.repeatPassword) {
       toast.error("Password dan password yang diulang harus sama");
       return;
     }
-
-    fetch("https://be-penginapan.vercel.app/api/auth/signup/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
-      body: JSON.stringify(formData),
-    })
-      .then(async (response) => {
-        if (!response.ok) {
-          const data = await response.json();
-          throw new Error(data.error);
+    try {
+      setLoading(true);
+      const response = await fetch(
+        "https://be-penginapan.vercel.app/api/auth/signup/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+          },
+          body: JSON.stringify(formData),
         }
+      );
 
+      if (!response.ok) {
         const data = await response.json();
-        toast.success(data.message);
+        throw new Error(data.error);
+      }
 
-        setIsDone(true);
-      })
-      .catch((error) => {
-        toast.error(error);
-      });
+      const data = await response.json();
+      toast.success(data.message);
+      setIsDone(true);
+    } catch (err) {
+      toast.error(err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (isDone) {
@@ -137,7 +152,10 @@ export const Register = () => {
         </button>
       </form>
       <a href="/register" className="text-c-light-cream">
-        Sudah punya akun? <span className="hover:underline">Masuk</span>
+        Sudah punya akun?{" "}
+        <span className="hover:underline">
+          {loading ? "Loading..." : "Masuk"}
+        </span>
       </a>
     </div>
   );

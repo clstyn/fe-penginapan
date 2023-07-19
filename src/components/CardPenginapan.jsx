@@ -29,7 +29,7 @@ export const CardPenginapan = (props) => {
             href={`https://www.google.com/maps/search/?api=1&query=${props.location.coordinates[1]},${props.location.coordinates[0]}`}
             target="_blank"
             rel="norefferer noopener"
-            className="hover:underline text-xs md:text-sm 2xl:text-base"
+            className="hover:underline text-xs md:text-sm 2xl:text-base text-indigo-600"
           >
             Lokasi
           </a>

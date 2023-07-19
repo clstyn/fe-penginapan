@@ -5,6 +5,7 @@ import { AppContext } from "../context/AppContext";
 
 export const Login = () => {
   const { login, isLogged } = useContext(AppContext);
+  const [loading, isLoading] = useState(false);
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -20,8 +21,12 @@ export const Login = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    if (!formData.username || !formData.password) {
+      throw new Error("Isi semua isian dengan benar");
+    }
 
     try {
+      isLoading(true);
       const response = await fetch(
         "https://be-penginapan.vercel.app/api/auth/login",
         {
@@ -43,6 +48,8 @@ export const Login = () => {
       login(userData.user);
     } catch (error) {
       toast.error(error.message);
+    } finally {
+      isLoading(false);
     }
   };
 
@@ -83,7 +90,7 @@ export const Login = () => {
           onClick={handleSubmit}
           className="w-full xl:w-1/2 font-semibold text-c-dark-green text-xl md:text-2xl xl:text-3xl bg-c-light-green rounded-xl pl-3 py-2 md:pl-6 md:py-4 hover:bg-c-light-cream my-4"
         >
-          Masuk
+          {loading ? "Loading..." : "Masuk"}
         </button>
       </form>
       <a href="/register" className="text-c-light-cream">

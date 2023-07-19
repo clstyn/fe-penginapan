@@ -12,6 +12,7 @@ import { staticData } from "../data/staticData";
 
 export const Home = () => {
   const [penginapan, setPenginapan] = useState([]);
+  const [filteredPenginapan, setFilteredPenginapan] = useState([]);
   const { login, isLogged } = useContext(AppContext);
 
   const scrollSmoothTo = () => {
@@ -27,11 +28,26 @@ export const Home = () => {
   }, []);
 
   useEffect(() => {
+    setFilteredPenginapan(penginapan);
+  }, [penginapan]);
+
+  useEffect(() => {
     if (localStorage.getItem("user")) {
       const user = JSON.parse(localStorage.getItem("user"));
       login(user);
     }
   }, []);
+
+  const handleSearch = (e) => {
+    const filtered = penginapan.filter((o) => {
+      const facilities = o.fasilitas.some((item) =>
+        item.toLowerCase().includes(e.target.value.toLowerCase())
+      );
+      const names = o.namaKost.toLowerCase().includes(e.target.value);
+      return facilities || names;
+    });
+    setFilteredPenginapan(filtered);
+  };
 
   return (
     <div className="">
@@ -85,9 +101,9 @@ export const Home = () => {
 
       <section
         id="penginapan"
-        className="bg-c-light-cream min-h-screen flex items-center justify-center py-24 md:pt-32 text-c-black text-center font-righteous"
+        className="bg-c-light-cream min-h-screen flex items-start justify-center py-24 md:pt-32 text-c-black text-center font-righteous"
       >
-        <div className="container mx-auto flex flex-col items-center justify-center gap-8 w-5/6 md:w-2/3">
+        <div className="container mx-auto flex flex-col items-center justify-start h-full gap-8 w-5/6 md:w-2/3">
           <h1 className="text-c-black text-2xl md:text-3xl 2xl:text-5xl leading-none">
             Daftar Penginapan
           </h1>
@@ -95,26 +111,31 @@ export const Home = () => {
             <BsFillSearchHeartFill className="absolute left-4 top-3 w-4 h-4" />
             <input
               type="text"
-              placeholder="Cari nama penginapan..."
+              onChange={handleSearch}
+              placeholder="Cari nama/fasilitas kost..."
               className="w-full py-2 pl-10 pr-0 md:pr-10 border border-gray-300 rounded-md outline-none text-sm md:text-lg focus:border-c-dark-green pl-12"
             />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 w-full">
-            {penginapan?.map((item, index) => {
-              return (
-                <CardPenginapan
-                  key={index}
-                  namaKost={item.namaKost}
-                  hargaPerMonth={item.hargaPerMonth}
-                  totalRoom={item.totalRoom}
-                  bookedRoom={item.bookedRoom}
-                  fasilitas={item.fasilitas}
-                  phoneNo={item.phoneNo}
-                  location={item.location}
-                  imgUrl={item.imgUrl}
-                />
-              );
-            })}
+            {filteredPenginapan.length === 0 ? (
+              <div className="">Tidak ditemukan kost yang sesuai</div>
+            ) : (
+              filteredPenginapan.map((item, index) => {
+                return (
+                  <CardPenginapan
+                    key={index}
+                    namaKost={item.namaKost}
+                    hargaPerMonth={item.hargaPerMonth}
+                    totalRoom={item.totalRoom}
+                    bookedRoom={item.bookedRoom}
+                    fasilitas={item.fasilitas}
+                    phoneNo={item.phoneNo}
+                    location={item.location}
+                    imgUrl={item.imgUrl}
+                  />
+                );
+              })
+            )}
           </div>
         </div>
       </section>
