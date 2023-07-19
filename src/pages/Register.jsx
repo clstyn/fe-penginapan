@@ -1,12 +1,14 @@
 import React, { useState } from "react";
+import { Navigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 export const Register = () => {
+  const [isDone, setIsDone] = useState(false);
   const [formData, setFormData] = useState({
-    fullName: "",
+    fullname: "",
     username: "",
     address: "",
-    nik: "",
+    NIK: "",
     password: "",
     repeatPassword: "",
   });
@@ -22,14 +24,17 @@ export const Register = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (formData.password != formData.repeatPassword) {
+    if (formData.password !== formData.repeatPassword) {
       toast.error("Password dan password yang diulang harus sama");
       return;
     }
 
-    fetch("https://pharmaweb14.herokuapp.com/api/auth/signup/", {
+    fetch("https://be-penginapan.vercel.app/api/auth/signup/", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
       body: JSON.stringify(formData),
     })
       .then(async (response) => {
@@ -40,12 +45,17 @@ export const Register = () => {
 
         const data = await response.json();
         toast.success(data.message);
+
+        setIsDone(true);
       })
       .catch((error) => {
         toast.error(error);
       });
   };
 
+  if (isDone) {
+    return <Navigate to="/login" />;
+  }
   return (
     <div className="w-screen min-h-screen bg-c-dark-green flex flex-col items-center justify-center font-poppins">
       <form className="flex flex-col items-center jusityf-center w-5/6 md:w-3/5 gap-8">
@@ -57,8 +67,8 @@ export const Register = () => {
           className="w-full xl:w-1/2 text-sm xl:text-xl
                                 text-c-dark-green rounded-xl
                                 focus:outline-none focus:ring-0 pl-3 py-2 md:pl-6 md:py-4"
-          name="fullName"
-          value={formData.fullName}
+          name="fullname"
+          value={formData.fullname}
           onChange={handleChange}
           placeholder="Nama Lengkap"
           required
@@ -90,8 +100,8 @@ export const Register = () => {
           className="w-full xl:w-1/2 text-sm xl:text-xl
                                 text-c-dark-green rounded-xl
                                 focus:outline-none focus:ring-0 pl-3 py-2 md:pl-6 md:py-4"
-          name="nik"
-          value={formData.nik}
+          name="NIK"
+          value={formData.NIK}
           onChange={handleChange}
           placeholder="NIK"
           required

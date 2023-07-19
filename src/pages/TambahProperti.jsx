@@ -11,15 +11,14 @@ import "leaflet/dist/leaflet.css";
 import { AppContext } from "../context/AppContext";
 
 export const TambahProperti = () => {
-  const { login } = useContext(AppContext);
+  const { isLogged } = useContext(AppContext);
   const [isAdded, setIsAdded] = useState(false);
   const [imgUrl, setImgUrl] = useState("");
+  const [errorText, setErrorText] = useState("");
 
   const navigate = useNavigate();
 
   const pinRef = useRef(null);
-
-  // const [imgUrl, setImgUrl] = useState("");
 
   const [formData, setFormData] = useState({
     userId: "",
@@ -96,17 +95,15 @@ export const TambahProperti = () => {
   };
 
   useEffect(() => {
-    console.log(formData);
-  }, [formData]);
-
-  useEffect(() => {
     setFormData((prevData) => ({
       ...prevData,
       imgUrl: imgUrl,
     }));
   }, [imgUrl]);
 
-  const uploadToFirebase = (file) => {
+  const uploadToFirebase = (e) => {
+    e.preventDefault();
+    const file = e.target.files[0];
     if (!file) return;
     const storageRef = ref(storage, `files/kostUploads/${file.name}`);
     const uploadTask = uploadBytesResumable(storageRef, file);
@@ -131,13 +128,25 @@ export const TambahProperti = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const imageUploaded = e.target
-      .querySelectorAll("div")[7]
-      .querySelector("input");
-    const file = imageUploaded?.files[0];
+    // const imageUploaded = e.target
+    //   .querySelectorAll("div")[7]
+    //   .querySelector("input");
+    // const file = imageUploaded?.files[0];
 
     try {
-      uploadToFirebase(file);
+      if (
+        !formData.namaKost ||
+        formData.hargaPerMonth === 0 ||
+        formData.totalRoom === 0 ||
+        formData.bookedRoom === 0 ||
+        !formData.fasilitas ||
+        !formData.imgUrl ||
+        !formData.location.coordinates ||
+        !formData.phoneNo
+      ) {
+        throw new Error("Isi semua isian dengan benar");
+      }
+
       const token = JSON.parse(localStorage.getItem("token"));
       const response = await fetch(
         "https://be-penginapan.vercel.app/api/penginapan/",
@@ -162,6 +171,8 @@ export const TambahProperti = () => {
       setIsAdded(true);
     } catch (err) {
       toast.error(err);
+      setErrorText(err.message);
+      console.log(err);
     }
   };
 
@@ -178,15 +189,11 @@ export const TambahProperti = () => {
 
   useEffect(() => {
     if (localStorage.getItem("user")) {
-      const user = JSON.parse(localStorage.getItem("user"));
       const id = JSON.parse(localStorage.getItem("user"))._id;
-      login(user);
       setFormData((prevData) => ({
         ...prevData,
         userId: id,
       }));
-    } else {
-      navigate("/");
     }
   }, []);
 
@@ -194,9 +201,13 @@ export const TambahProperti = () => {
     return <Navigate replace to="/my-property" />;
   }
 
+  if (!isLogged) {
+    return <Navigate replace to="/" />;
+  }
+
   return (
     <div className="flex items-center justify-center min-h-screen w-screen bg-hero bg-cover">
-      <div className="bg-c-light-cream rounded-lg p-8 w-5/6 md:w-1/2 z-50 max-md:my-8 max-md:text-xs">
+      <div className="bg-c-light-cream rounded-lg p-8 w-5/6 md:w-1/2 max-md:my-8 max-md:text-xs">
         <h2 className="text-lg md:text-xl font-semibold mb-4">
           Tambah Properti
         </h2>
@@ -293,6 +304,7 @@ export const TambahProperti = () => {
             <input
               type="file"
               id="imgUrl"
+              onChange={uploadToFirebase}
               className="unggah-gambar border border-gray-300 px-4 py-2 w-full rounded"
             />
             <p className="mt-2 ml-4">{progresspercent}%</p>
@@ -307,6 +319,12 @@ export const TambahProperti = () => {
             ></div>
           </div>
           <div className="flex justify-end mt-8">
+            <p
+              id="error-text"
+              className="text-red-500 text-lg mr-8 font-poppins"
+            >
+              {errorText}
+            </p>
             <button
               onClick={() => navigate("/my-property")}
               type="button"

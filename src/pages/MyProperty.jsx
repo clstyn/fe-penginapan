@@ -9,7 +9,7 @@ import { CardMyProperty } from "../components/CardMyProperty";
 import { AppContext } from "../context/AppContext";
 
 export const MyProperty = () => {
-  const { isLogged, userData } = useContext(AppContext);
+  const { isLogged, userData, login } = useContext(AppContext);
   const [myProperty, setMyProperty] = useState([]);
 
   const navigate = useNavigate();
@@ -65,8 +65,12 @@ export const MyProperty = () => {
   };
 
   useEffect(() => {
-    if (JSON.parse(localStorage.getItem("user")).role === "admin") {
-      navigate("/");
+    if (JSON.parse(localStorage.getItem("user"))) {
+      const dataUser = JSON.parse(localStorage.getItem("user"));
+      login(dataUser);
+      if (JSON.parse(localStorage.getItem("user")).role === "admin") {
+        navigate("/");
+      }
     }
     fetchData();
   }, []);

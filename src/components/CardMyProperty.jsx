@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaEdit } from "react-icons/fa";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { Dialog } from "@headlessui/react";
@@ -66,12 +66,21 @@ export const CardMyProperty = (props) => {
               {props?.property.namaKost}
             </p>
             <div className="flex gap-1">
-              <div
-                onClick={() => navigate("/editkost")}
+              <Link
+                to={{
+                  pathname: "/editkost",
+                  search: "?id=" + props?.property._id,
+                }}
                 className="cursor-pointer w-10 aspect-square bg-orange-400 hover:bg-orange-500 rounded-lg flex items-center justify-center text-white"
               >
                 <FaEdit className="text-xl" />
-              </div>
+              </Link>
+              {/* <div
+                onClick={() => navigate(`/editkost/${props?.property._id}`)}
+                className="cursor-pointer w-10 aspect-square bg-orange-400 hover:bg-orange-500 rounded-lg flex items-center justify-center text-white"
+              >
+                <FaEdit className="text-xl" />
+              </div> */}
               <div
                 onClick={openModal}
                 className="cursor-pointer w-10 aspect-square bg-red-500 hover:bg-red-600 rounded-lg flex items-center justify-center text-white"
