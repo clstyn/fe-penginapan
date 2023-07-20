@@ -56,14 +56,14 @@ export const Home = () => {
       <section className="bg-hero bg-cover min-h-screen flex items-center justify-center pt-36 md:pt-48 md:py-24 text-c-light-cream">
         <div className="container mx-auto max-md:px-12">
           <div className="flex flex-col items-center justify-center gap-8 md:gap-32 md:px-12">
-            <h2 className="font-righteous text-2xl md:text-4xl 2xl:text-[64px] text-center">
+            <h2 className="font-righteous text-2xl md:text-3xl 2xl:text-5xl text-center">
               Temukan penginapan terjangkau di
             </h2>
             <div className="flex flex-col md:gap-8 items-center justify-center">
               <h1 className="font-aksara text-[96px] md: text-[128px] xl:text-[200px] leading-none">
                 Palihan
               </h1>
-              <h1 className="font-righteous text-2xl md:text-4xl 2xl:text-[64px] text-center">
+              <h1 className="font-righteous text-2xl md:text-3xl 2xl:text-5xl text-center">
                 Kecamatan Temon, Kabupaten Kulonprogo
               </h1>
             </div>
@@ -118,7 +118,9 @@ export const Home = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 w-full">
             {filteredPenginapan.length === 0 ? (
-              <div className="">Tidak ditemukan kost yang sesuai</div>
+              <div className="col-span-3 text-center">
+                Tidak ditemukan kost yang sesuai
+              </div>
             ) : (
               filteredPenginapan.map((item, index) => {
                 return (
