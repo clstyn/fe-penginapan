@@ -51,10 +51,12 @@ export const NavbarAfterLogin = () => {
   return (
     <nav
       role="navigation"
-      className="h-16 w-full absolute top-0 bg-c-dark-green"
+      className="h-16 w-full fixed top-0 z-40 bg-c-dark-green"
     >
       <div className="flex h-full items-center justify-between text-white px-3 md:px-8">
-        <p className="font-righteous text-lg md:text-2xl">Penginapan.Palihan</p>
+        <a href="/" className="font-righteous text-lg md:text-2xl">
+          Stay in Palihan
+        </a>
         <ul className="hidden md:flex gap-16 font-poppins text-xl">
           <li>
             <Link to={"/"} className="hover:font-semibold mx-2">

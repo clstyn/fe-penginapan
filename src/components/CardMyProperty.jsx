@@ -26,7 +26,7 @@ export const CardMyProperty = (props) => {
       <Dialog open={modalOpen} onClose={closeModal} as="div">
         <Dialog.Overlay className="fixed inset-0 bg-black opacity-40" />
 
-        <div className="fixed inset-0 flex flex-col top-12 items-center justify-center bg-white rounded-lg w-fit h-fit mx-auto px-6 py-4">
+        <div className="fixed inset-0 z-50 flex flex-col top-12 items-center justify-center bg-white rounded-lg w-fit h-fit mx-auto px-6 py-4">
           <Dialog.Title className="text-lg font-medium text-gray-900">
             Konfirmasi Hapus Data
           </Dialog.Title>
@@ -91,7 +91,9 @@ export const CardMyProperty = (props) => {
           </div>
           <p className="font-semibold text-sm md:text-base 2xl:text-xl">
             Harga:{" "}
-            <span className="font-normal">{props?.property.hargaPerMonth}</span>
+            <span className="font-normal">
+              {props?.property.hargaPerMonth.toLocaleString("id-ID")}
+            </span>
           </p>
           <p className="font-semibold text-sm md:text-base 2xl:text-xl">
             Total kamar:{" "}

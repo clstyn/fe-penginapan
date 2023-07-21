@@ -210,7 +210,7 @@ export const TambahProperti = () => {
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen w-screen bg-hero bg-cover">
+    <div className="flex items-center justify-center min-h-screen w-screen bg-hero bg-cover font-poppins">
       <div className="bg-c-light-cream rounded-lg p-8 w-5/6 md:w-1/2 max-md:my-8 max-md:text-xs">
         <h2 className="text-lg md:text-xl font-semibold mb-4">
           Tambah Properti

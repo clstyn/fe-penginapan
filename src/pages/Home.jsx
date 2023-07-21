@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 
 import { BsFillSearchHeartFill } from "react-icons/bs";
+import { toast } from "react-toastify";
 
 import { NavbarBeforeLogin } from "../components/navbar/NavbarBeforeLogin";
 import { NavbarAfterLogin } from "../components/navbar/NavbarAfterLogin";
@@ -8,11 +9,12 @@ import { Footer } from "../components/Footer";
 import { CardPenginapan } from "../components/CardPenginapan";
 import { AppContext } from "../context/AppContext";
 
-import { staticData } from "../data/staticData";
+// import { staticData } from "../data/staticData";
 
 export const Home = () => {
   const [penginapan, setPenginapan] = useState([]);
   const [filteredPenginapan, setFilteredPenginapan] = useState([]);
+  const [loading, setLoading] = useState(false);
   const { login, isLogged } = useContext(AppContext);
 
   const scrollSmoothTo = () => {
@@ -23,8 +25,27 @@ export const Home = () => {
     });
   };
 
+  const fetchData = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch(
+        `https://be-penginapan.vercel.app/api/penginapan/`
+      );
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.error);
+      }
+      const data = await response.json();
+      setPenginapan(data);
+    } catch (err) {
+      toast.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    setPenginapan(staticData);
+    fetchData();
   }, []);
 
   useEffect(() => {
@@ -57,7 +78,7 @@ export const Home = () => {
         <div className="container mx-auto max-md:px-12">
           <div className="flex flex-col items-center justify-center gap-8 md:gap-32 md:px-12">
             <h2 className="font-righteous text-2xl md:text-3xl 2xl:text-5xl text-center">
-              Temukan penginapan terjangkau di
+              Temukan penginapan terjangkau di Kalurahan
             </h2>
             <div className="flex flex-col md:gap-8 items-center justify-center">
               <h1 className="font-aksara text-[96px] md: text-[128px] xl:text-[200px] leading-none">
@@ -80,21 +101,19 @@ export const Home = () => {
       <section className="bg-c-cream min-h-screen flex items-center justify-center py-24 md:pt-32 text-c-black text-center font-righteous">
         <div className="container mx-auto flex flex-col items-center justify-center gap-8 w-5/6 2xl:w-1/2">
           <p className="w-4/5 text-lg md:text-[32px] leading-loose">
-            Selamat datang di Palihan, sebuah surga tersembunyi di Kecamatan
-            Temon, Kabupaten Kulonprogo!
+            Selamat datang di Palihan, salah satu Kalurahan yang terletak di
+            Kecamatan Temon, Kabupaten Kulon Progo.
           </p>
           <p className="w-full text-sm md:text-[28px] leading-loose">
-            Lokasi yang strategis dekat Yogyakarta International Airport,
-            menjadikan Palihan sebagai pintu gerbang ideal untuk mengawali
-            petualangan Anda!. Jarak yang terjangkau menuju pusat kota
-            Yogyakarta membuat Anda semakin dekat dengan beragam destinasi
-            ikonik.
+            Berada di Barat Daya Kabupaten Kulon Progo yang dekat dengan kawasan
+            pantai, dan sewilayah dengan Bandar Udara Yogyakarta International
+            Airport, menjadikan desa Palihan sebagai kawasan yang cukup tentram
+            namun tidak kalah strategis untuk tinggal.
           </p>
           <p className="w-full text-sm md:text-[28px] leading-loose">
-            Palihan juga memiliki berbagai penginapan yang cocok untuk semua
-            jenis wisatawan. Mulai dari kost hingga homestay yang nyaman. Di
-            sini, selalu ada tempat istirahat yang sesuai dengan selera dan
-            anggaran Anda!
+            Banyak kost, kontrakan, atau penginapan yang tersedia di sini yang
+            siap menunjang kehidupan Anda saat tinggal di desa kami. Telusuri
+            hunian yang sesuai dengan keinginan Anda di sini!
           </p>
         </div>
       </section>
@@ -117,6 +136,9 @@ export const Home = () => {
             />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 w-full">
+            {loading ? (
+              <p className="col-span-full">Mengambil Data...</p>
+            ) : null}
             {filteredPenginapan.length === 0 ? (
               <div className="col-span-3 text-center">
                 Tidak ditemukan kost yang sesuai
