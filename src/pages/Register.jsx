@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 export const Register = () => {
@@ -167,12 +167,12 @@ export const Register = () => {
           Daftar
         </button>
       </form>
-      <a href="/register" className="text-c-light-cream">
+      <Link to="/register" className="text-c-light-cream">
         Sudah punya akun?{" "}
         <span className="hover:underline">
           {loading ? "Loading..." : "Masuk"}
         </span>
-      </a>
+      </Link>
     </div>
   );
 };

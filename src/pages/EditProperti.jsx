@@ -15,7 +15,7 @@ export const EditProperti = () => {
   const { isLogged } = useContext(AppContext);
   const navigate = useNavigate();
 
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const propertyId = searchParams.get("id");
 
   const [errorText, setErrorText] = useState("");
