@@ -38,7 +38,7 @@ export const Home = () => {
       const data = await response.json();
       setPenginapan(data);
     } catch (err) {
-      toast.error(err);
+      toast.error(err, { autoClose: 5000, className: "text-xl" });
     } finally {
       setLoading(false);
     }
