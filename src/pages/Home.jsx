@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 
 import { BsFillSearchHeartFill } from "react-icons/bs";
+import { MdKeyboardArrowUp } from "react-icons/md";
 import { toast } from "react-toastify";
 
 import { NavbarBeforeLogin } from "../components/navbar/NavbarBeforeLogin";
@@ -16,6 +17,10 @@ export const Home = () => {
   const [filteredPenginapan, setFilteredPenginapan] = useState([]);
   const [loading, setLoading] = useState(false);
   const { login, isLogged } = useContext(AppContext);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   const scrollSmoothTo = () => {
     const targetSection = document.getElementById("penginapan");
@@ -44,6 +49,20 @@ export const Home = () => {
     }
   };
 
+  const handleScroll = () => {
+    const toTopButton = document.getElementById("toTopButton");
+    if (
+      document.body.scrollTop > 100 ||
+      document.documentElement.scrollTop > 100
+    ) {
+      toTopButton.classList.remove("hidden");
+      toTopButton.classList.add("block");
+    } else {
+      toTopButton.classList.remove("block");
+      toTopButton.classList.add("hidden");
+    }
+  };
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -58,6 +77,11 @@ export const Home = () => {
       login(user);
     }
   }, []);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  });
 
   const handleSearch = (e) => {
     const filtered = penginapan.filter((o) => {
@@ -139,7 +163,7 @@ export const Home = () => {
             {loading ? (
               <p className="col-span-full">Mengambil Data...</p>
             ) : null}
-            {filteredPenginapan.length === 0 ? (
+            {!loading && filteredPenginapan.length === 0 ? (
               <div className="col-span-3 text-center">
                 Tidak ditemukan kost yang sesuai
               </div>
@@ -164,6 +188,13 @@ export const Home = () => {
         </div>
       </section>
       <Footer />
+      <button
+        id="toTopButton"
+        onClick={scrollToTop}
+        className="fixed bg-c-dark-green hidden rounded-xl aspect-square w-8 xl:w-16 bottom-4 right-4 xl:bottom-16 xl:right-16 border-2 border-white"
+      >
+        <MdKeyboardArrowUp className="text-white w-full" />
+      </button>
     </div>
   );
 };
