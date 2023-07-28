@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 export const Register = () => {
@@ -8,6 +8,7 @@ export const Register = () => {
   const [formData, setFormData] = useState({
     fullname: "",
     username: "",
+    email: "",
     address: "",
     NIK: "",
     password: "",
@@ -27,6 +28,7 @@ export const Register = () => {
     if (
       !formData.fullname ||
       !formData.username ||
+      !formData.email ||
       !formData.address ||
       !formData.NIK ||
       !formData.password ||
@@ -36,7 +38,10 @@ export const Register = () => {
     }
 
     if (formData.password !== formData.repeatPassword) {
-      toast.error("Password dan password yang diulang harus sama");
+      toast.error("Password dan password yang diulang harus sama", {
+        autoClose: 5000,
+        className: "text-xl",
+      });
       return;
     }
     try {
@@ -59,10 +64,10 @@ export const Register = () => {
       }
 
       const data = await response.json();
-      toast.success(data.message);
+      toast.success(data.message, { autoClose: 5000, className: "text-xl" });
       setIsDone(true);
     } catch (err) {
-      toast.error(err);
+      toast.error(err, { autoClose: 5000, className: "text-xl" });
     } finally {
       setLoading(false);
     }
@@ -97,6 +102,17 @@ export const Register = () => {
           value={formData.username}
           onChange={handleChange}
           placeholder="Username"
+          required
+        />
+        <input
+          type="email"
+          className="w-full xl:w-1/2 text-sm xl:text-xl
+                                text-c-dark-green rounded-xl
+                                focus:outline-none focus:ring-0 pl-3 py-2 md:pl-6 md:py-4"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          placeholder="Alamat Email"
           required
         />
         <input
@@ -151,12 +167,12 @@ export const Register = () => {
           Daftar
         </button>
       </form>
-      <a href="/register" className="text-c-light-cream">
+      <Link to="/register" className="text-c-light-cream">
         Sudah punya akun?{" "}
         <span className="hover:underline">
           {loading ? "Loading..." : "Masuk"}
         </span>
-      </a>
+      </Link>
     </div>
   );
 };

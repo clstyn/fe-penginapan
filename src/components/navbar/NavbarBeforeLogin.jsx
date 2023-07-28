@@ -24,9 +24,9 @@ export const NavbarBeforeLogin = () => {
       className="h-16 w-full fixed top-0 z-40 bg-c-dark-green"
     >
       <div className="flex h-full items-center justify-between text-white px-3 md:px-8">
-        <a href="/" className="font-righteous text-lg md:text-2xl">
+        <Link to="/" className="font-righteous text-lg md:text-2xl">
           Stay in Palihan
-        </a>
+        </Link>
         <ul className="hidden md:flex gap-16 font-poppins text-xl">
           <li>
             <Link to={"/"} className="hover:font-semibold mx-2">

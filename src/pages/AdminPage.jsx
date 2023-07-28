@@ -27,7 +27,7 @@ export const AdminPage = () => {
       const data = await response.json();
       setDataUser(data);
     } catch (err) {
-      toast.error(err);
+      toast.error(err, { autoClose: 5000, className: "text-xl" });
     }
   };
 
@@ -52,11 +52,11 @@ export const AdminPage = () => {
         }
       );
       const data = await response.json();
-      toast.success(data.message);
+      toast.success(data.message, { autoClose: 5000, className: "text-xl" });
       fetchData();
     } catch (err) {
       console.log(err);
-      toast.error(err);
+      toast.error(err, { autoClose: 5000, className: "text-xl" });
     }
   };
 

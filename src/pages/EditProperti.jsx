@@ -15,7 +15,7 @@ export const EditProperti = () => {
   const { isLogged } = useContext(AppContext);
   const navigate = useNavigate();
 
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const propertyId = searchParams.get("id");
 
   const [errorText, setErrorText] = useState("");
@@ -139,7 +139,7 @@ export const EditProperti = () => {
         const data = await response.json();
         setProperty(data);
       } catch (err) {
-        toast.error(err);
+        toast.error(err, { autoClose: 5000, className: "text-xl" });
       }
     };
     fetchData();
@@ -208,10 +208,10 @@ export const EditProperti = () => {
         throw new Error(data.error);
       }
       const data = await response.json();
-      toast.success(data.message);
+      toast.success(data.message, { autoClose: 5000, className: "text-xl" });
       setIsAdded(true);
     } catch (err) {
-      toast.error(err);
+      toast.error(err, { autoClose: 5000, className: "text-xl" });
       setErrorText(err.message);
       console.log(err);
     } finally {

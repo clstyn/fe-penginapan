@@ -169,11 +169,11 @@ export const TambahProperti = () => {
       }
 
       const data = await response.json();
-      toast.success(data.message);
+      toast.success(data.message, { autoClose: 5000, className: "text-xl" });
       setIsAdded(true);
     } catch (err) {
       toast.error(err);
-      setErrorText(err.message);
+      setErrorText(err.message, { autoClose: 5000, className: "text-xl" });
       console.log(err);
     } finally {
       setLoading(false);

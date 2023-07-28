@@ -36,7 +36,7 @@ export const MyProperty = () => {
       const dataRes = await response.json();
       setMyProperty(dataRes.data);
     } catch (err) {
-      toast.error(err);
+      toast.error(err, { autoClose: 5000, className: "text-xl" });
     } finally {
       setLoading(false);
     }
@@ -60,10 +60,10 @@ export const MyProperty = () => {
         throw new Error(data.error);
       }
       const data = await response.json();
-      toast.success(data.message);
+      toast.success(data.message, { autoClose: 5000, className: "text-xl" });
       fetchData();
     } catch (err) {
-      toast.error(err);
+      toast.error(err, { autoClose: 5000, className: "text-xl" });
     }
   };
 
