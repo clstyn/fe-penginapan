@@ -70,7 +70,7 @@ export const Login = () => {
           type="text"
           className="w-full xl:w-1/2 text-sm xl:text-xl
                                 text-c-dark-green rounded-xl
-                                focus:outline-none focus:ring-0 pl-3 py-2 md:pl-6 md:py-4"
+                                focus:outline-none focus:ring-0 px-3 py-2 md:px-6 md:py-4"
           name="username"
           value={formData.username}
           onChange={handleChange}
@@ -81,7 +81,7 @@ export const Login = () => {
           type="password"
           className="w-full xl:w-1/2 text-sm xl:text-xl
                                 text-c-dark-green rounded-xl
-                                focus:outline-none focus:ring-0 pl-3 py-2 md:pl-6 md:py-4"
+                                focus:outline-none focus:ring-0 px-3 py-2 md:px-6 md:py-4"
           name="password"
           value={formData.password}
           onChange={handleChange}

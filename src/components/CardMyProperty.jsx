@@ -58,9 +58,9 @@ export const CardMyProperty = (props) => {
         <img
           src={props?.property.imgUrl}
           alt={props?.property.namaKost}
-          className="max-md:rounded-t-xl md:rounded-l-xl md:w-1/2 2xl:w-1/3 object-cover object-center"
+          className="max-md:rounded-t-xl md:rounded-l-xl h-[240px] md:h-[350px] md:w-[450px] 2xl:w-[550px] object-cover object-center"
         />
-        <div className="flex flex-col items-start px-4 py-3 md:pl-12 md:pr-4 md:py-6 md:w-1/2 xl:w-full gap-2 mb-4">
+        <div className="flex flex-col items-start px-4 py-3 md:pl-12 md:pr-4 md:py-6 xl:w-1/2 gap-2 mb-4">
           <div className="flex justify-between items-center w-full mb-4 md:mb-8 font-semibold">
             <p className="text-lg md:text-2xl 2xl:text-3xl">
               {props?.property.namaKost}
