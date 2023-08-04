@@ -48,7 +48,7 @@ export const CardPenginapan = (props) => {
         <div className="flex items-center justify-between">
           <a
             href={`https://wa.me/62` + `${props.phoneNo.substring(1)}`}
-            className="bg-c-mid-green text-sm md:text-md 2xl:text-lg px-3 md:px-4 py-1 md:py-2 rounded-full text-c-light-cream font-semibold hover:font-bold hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[5px_5px_0_#000] transition-all duration-300 ease-out"
+            className="bg-c-mid-green text-sm md:text-md 2xl:text-lg px-3 md:px-4 py-1 md:py-2 rounded-full text-c-light-cream font-semibold hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[5px_5px_0_#000] transition-all duration-300 ease-out"
             target="_blank"
             rel="norefferer noopener"
           >
@@ -56,7 +56,7 @@ export const CardPenginapan = (props) => {
           </a>
           <div
             onClick={openModal}
-            className="cursor-pointer bg-c-light-green text-sm md:text-md 2xl:text-lg px-3 md:px-4 py-1 md:py-2 rounded-full text-c-light-cream font-semibold hover:font-bold hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[5px_5px_0_#3F513B] transition-all duration-300 ease-out"
+            className="cursor-pointer bg-c-light-green text-sm md:text-md 2xl:text-lg px-3 md:px-4 py-1 md:py-2 rounded-full text-c-light-cream font-semibold hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[5px_5px_0_#3F513B] transition-all duration-300 ease-out"
             target="_blank"
             rel="norefferer noopener"
           >

@@ -107,8 +107,8 @@ export const Home = () => {
     <div className="">
       {!isLogged ? <NavbarBeforeLogin /> : <NavbarAfterLogin />}
 
-      <section className="bg-hero bg-cover min-h-screen flex items-center justify-center pt-36 md:pt-48 md:py-24 text-c-light-cream">
-        <div className="container mx-auto max-md:px-12 relative z-20">
+      <section className="bg-hero bg-cover min-h-screen flex items-center justify-center pt-36 md:pt-48 md:py-24 text-c-light-cream relative">
+        <div className="container mx-auto max-md:px-8 relative z-20 relative">
           <div className="flex flex-col items-center justify-center gap-8 md:gap-32 md:px-12">
             <h2 className="font-righteous text-2xl md:text-3xl 2xl:text-5xl text-center">
               Penginapan terjangkau di
@@ -118,7 +118,7 @@ export const Home = () => {
               data-aos="zoom-in"
               data-aos-duration="2000"
             >
-              <h1 className="font-poppins text-[96px] md: text-[128px] xl:text-[200px] leading-none">
+              <h1 className="font-poppins font-semibold text-[56px] md:text-[64px] md:text-[96px] xl:text-[112px]">
                 Palihan
               </h1>
               <h1 className="font-righteous text-2xl md:text-3xl 2xl:text-5xl text-center">
@@ -127,7 +127,7 @@ export const Home = () => {
             </div>
             <div
               onClick={() => scrollSmoothTo()}
-              className="cursor-pointer bg-c-mid-green rounded-full px-4 md:px-16 py-2 md:py-4 text-xl md:text-4xl font-righteous hover:bg-c-cream hover:text-c-mid-green hover:border-2 hover:border-c-mid-green transition"
+              className="cursor-pointer animate-bounce bg-c-mid-green rounded-full px-4 md:px-16 py-2 md:py-4 text-xl md:text-2xl font-righteous hover:bg-c-cream hover:text-c-mid-green hover:shadow-[5px_5px_0_#3F513B] hover:-translate-x-2 hover:-translate-y-2 transition-all ease-out"
               data-aos="zoom-in"
               data-aos-duration="2000"
             >
@@ -181,14 +181,14 @@ export const Home = () => {
         <div className="container mx-auto flex flex-col items-center justify-start h-full gap-8 w-5/6 md:w-2/3">
           <h1
             className="text-c-black text-2xl md:text-3xl 2xl:text-5xl leading-none"
-            data-aos="zoom-in"
+            data-aos="fade-up"
             data-aos-duration="2000"
           >
             Daftar Penginapan
           </h1>
           <div
             className="font-poppins text-xl relative w-3/4 md:w-1/2"
-            data-aos="fade-down"
+            data-aos="fade-up"
             data-aos-duration="2000"
           >
             <BsFillSearchHeartFill className="absolute left-4 top-3 w-4 h-4" />
@@ -201,7 +201,7 @@ export const Home = () => {
           </div>
           <div
             className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 w-full md:mt-12"
-            data-aos="fade-down"
+            data-aos="fade-up"
             data-aos-duration="3000"
           >
             {loading ? (
@@ -235,7 +235,7 @@ export const Home = () => {
       <button
         id="toTopButton"
         onClick={scrollToTop}
-        className="fixed bg-c-dark-green hidden rounded-xl aspect-square w-8 xl:w-16 bottom-4 right-4 xl:bottom-16 xl:right-16 border-2 border-white hover:scale-110 transition"
+        className="fixed bg-c-dark-green hidden rounded-xl aspect-square w-8 xl:w-16 bottom-4 right-4 xl:bottom-16 xl:right-16 border-2 border-white hover:scale-110 transition z-50"
       >
         <MdKeyboardArrowUp className="text-white text-4xl mx-auto" />
       </button>

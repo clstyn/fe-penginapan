@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import Dropdown from "../common/Dropdown";
+import { HiMenu, HiX } from "react-icons/hi";
 
 export const NavbarBeforeLogin = () => {
+  const [navbarPhoneOpen, setNavbarPhoneOpen] = useState(false);
+
+  const toggleNavbarPhone = () => {
+    setNavbarPhoneOpen(!navbarPhoneOpen);
+  };
+
   const menuNormal = [
     { id: 1, value: "BERANDA", linkTo: "/" },
     { id: 2, value: "PETA PENGINAPAN", linkTo: "/maps-penginapan" },
@@ -48,11 +55,34 @@ export const NavbarBeforeLogin = () => {
             </Link>
           </li>
         </ul>
-        <div className="md:hidden">
+        {/* <div className="md:hidden">
           <div className="cursor-pointer">
             <Dropdown items={menuNormal} />
           </div>
+        </div> */}
+        <div
+          className={`md:hidden transition-all text-2xl relative navbar-phone-icon ${
+            navbarPhoneOpen ? "open" : ""
+          }`}
+          onClick={toggleNavbarPhone}
+        >
+          {navbarPhoneOpen ? <HiX /> : <HiMenu />}
         </div>
+        {navbarPhoneOpen ? (
+          <ul
+            className={`absolute top-0 left-0 -z-10 w-full max-h-fit flex flex-col items-center justify-center bg-c-dark-green text-white pt-20 pb-4 navbar-menu ${
+              navbarPhoneOpen ? "open" : "closed"
+            }`}
+          >
+            {menuNormal.map((item) => {
+              return (
+                <li key={item.id} className="font-poppins py-4">
+                  {item.value}
+                </li>
+              );
+            })}
+          </ul>
+        ) : null}
       </div>
     </nav>
   );
