@@ -102,7 +102,7 @@ export const Home = () => {
         <div className="container mx-auto max-md:px-12">
           <div className="flex flex-col items-center justify-center gap-8 md:gap-32 md:px-12">
             <h2 className="font-righteous text-2xl md:text-3xl 2xl:text-5xl text-center">
-              Temukan penginapan terjangkau di Kalurahan
+              Penginapan terjangkau di
             </h2>
             <div className="flex flex-col md:gap-8 items-center justify-center">
               <h1 className="font-aksara text-[96px] md: text-[128px] xl:text-[200px] leading-none">
