@@ -9,9 +9,9 @@ import { CardMyProperty } from "../components/CardMyProperty";
 import { AppContext } from "../context/AppContext";
 
 export const MyProperty = () => {
-  const { isLogged, userData, login } = useContext(AppContext);
+  const { isLogged, userData, login, setPenginapanData, myPropertyData } =
+    useContext(AppContext);
   const [loading, setLoading] = useState(false);
-  const [myProperty, setMyProperty] = useState([]);
 
   const navigate = useNavigate();
 
@@ -34,7 +34,7 @@ export const MyProperty = () => {
         throw new Error(data.error);
       }
       const dataRes = await response.json();
-      setMyProperty(dataRes.data);
+      setPenginapanData(dataRes.data);
     } catch (err) {
       toast.error(err, { autoClose: 5000, className: "text-xl" });
     } finally {
@@ -105,7 +105,7 @@ export const MyProperty = () => {
             </div>
           ) : null}
           <div className="flex flex-col gap-8 mb-12 md:mb-16 2xl:mb-24">
-            {myProperty?.map((item, index) => {
+            {myPropertyData?.map((item, index) => {
               return (
                 <CardMyProperty
                   key={index}
