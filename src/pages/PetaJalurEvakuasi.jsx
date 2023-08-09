@@ -12,7 +12,6 @@ import LegendaFix from "../assets/images/LegendaFix.png";
 import { AppContext } from "../context/AppContext";
 
 export const PetaJalurEvakuasi = () => {
-
   useEffect(() => {
     var map = L.map("map").setView([-7.894894, 110.061906], 15);
     var mapLink = '<a href="http://openstreetmap.org">OpenStreetMap</a>';
@@ -22,16 +21,16 @@ export const PetaJalurEvakuasi = () => {
     }).addTo(map);
 
     var arrowJalurEvakuasi1 = [
-      [-7.893493,	110.050933],
-      [-7.891501,	110.051737],
-      [-7.892252,	110.053222],
-      [-7.890398,	110.053942],
-      [-7.888863,	110.054682],
-      [-7.889563,	110.056415],
-      [-7.88681,	110.057172],
-      [-7.88227	,110.058437],
-      [-7.876217	,110.060197],
-      [-7.875662	,110.059485],
+      [-7.893493, 110.050933],
+      [-7.891501, 110.051737],
+      [-7.892252, 110.053222],
+      [-7.890398, 110.053942],
+      [-7.888863, 110.054682],
+      [-7.889563, 110.056415],
+      [-7.88681, 110.057172],
+      [-7.88227, 110.058437],
+      [-7.876217, 110.060197],
+      [-7.875662, 110.059485],
     ];
 
     for (var i = 0; i < arrowJalurEvakuasi1.length - 1; i++) {
@@ -58,9 +57,8 @@ export const PetaJalurEvakuasi = () => {
     }
 
     var arrowJalurEvakuasi2 = [
-      [-7.887508,	110.05121],
-      [-7.888115,	110.052732],
-
+      [-7.887508, 110.05121],
+      [-7.888115, 110.052732],
     ];
 
     for (var i = 0; i < arrowJalurEvakuasi2.length - 1; i++) {
@@ -87,9 +85,8 @@ export const PetaJalurEvakuasi = () => {
     }
 
     var arrowJalurEvakuasi3 = [
-      [-7.888115,	110.052732],
-      [-7.889563,	110.056415],
-
+      [-7.888115, 110.052732],
+      [-7.889563, 110.056415],
     ];
 
     for (var i = 0; i < arrowJalurEvakuasi3.length - 1; i++) {
@@ -116,14 +113,14 @@ export const PetaJalurEvakuasi = () => {
     }
 
     var arrowJalurEvakuasi4 = [
-      [-7.896009,	110.054964],
-      [-7.893800,	110.055180],
+      [-7.896009, 110.054964],
+      [-7.8938, 110.05518],
       [-7.891605, 110.055944],
-      [-7.889563,	110.056415],
-      [-7.88681,	110.057172],
-      [-7.88227,	110.058437],
-      [-7.876217,	110.060197],
-      [-7.875662,	110.059485],
+      [-7.889563, 110.056415],
+      [-7.88681, 110.057172],
+      [-7.88227, 110.058437],
+      [-7.876217, 110.060197],
+      [-7.875662, 110.059485],
     ];
 
     for (var i = 0; i < arrowJalurEvakuasi4.length - 1; i++) {
@@ -150,7 +147,7 @@ export const PetaJalurEvakuasi = () => {
     }
 
     var arrowJalurEvakuasi44 = [
-      [-7.892134,	110.057111],
+      [-7.892134, 110.057111],
       [-7.891605, 110.055944],
     ];
 
@@ -181,13 +178,12 @@ export const PetaJalurEvakuasi = () => {
       [-7.888719, 110.057427],
       [-7.888781, 110.057782],
       [-7.887562, 110.058052],
-      [-7.886648, 	110.05826],
+      [-7.886648, 110.05826],
       [-7.886676, 110.057518],
       [-7.88681, 110.057172],
       [-7.88227, 110.058437],
       [-7.876217, 110.060197],
       [-7.875662, 110.059485],
-
     ];
 
     for (var i = 0; i < arrowJalurEvakuasi5.length - 1; i++) {
@@ -215,7 +211,7 @@ export const PetaJalurEvakuasi = () => {
 
     var arrowJalurEvakuasi6 = [
       [-7.886522, 110.060113],
-      [-7.886648,	110.05826],
+      [-7.886648, 110.05826],
       [-7.886676, 110.057518],
       [-7.88681, 110.057172],
       [-7.88227, 110.058437],
@@ -246,14 +242,13 @@ export const PetaJalurEvakuasi = () => {
       var marker4b = L.marker(startPoint, { icon: arrowIcon4b }).addTo(map);
     }
 
-
     var arrowJalurEvakuasi7 = [
-     [-7.88682,	110.054194],
-     [-7.886783,	110.055457],
-     [-7.88681,	110.057172],
-     [-7.88227,	110.058437],
-     [-7.876217,	110.060197],
-     [-7.875662,	110.059485],
+      [-7.88682, 110.054194],
+      [-7.886783, 110.055457],
+      [-7.88681, 110.057172],
+      [-7.88227, 110.058437],
+      [-7.876217, 110.060197],
+      [-7.875662, 110.059485],
     ];
 
     for (var i = 0; i < arrowJalurEvakuasi7.length - 1; i++) {
@@ -280,73 +275,69 @@ export const PetaJalurEvakuasi = () => {
     }
 
     var arrowJalurEvakuasi8 = [
-      [-7.894288,	110.049782],
-      [-7.892874,	110.050447],
-      [-7.891304,	110.05108],
-      [-7.889736,	110.051593],
-      [-7.887855,	110.052186],
-     ];
- 
-     for (var i = 0; i < arrowJalurEvakuasi8.length - 1; i++) {
-       var startPoint = L.latLng(arrowJalurEvakuasi8[i]);
-       var endPoint = L.latLng(arrowJalurEvakuasi8[i + 1]);
- 
-       var angle =
-         (Math.atan2(
-           endPoint.lng - startPoint.lng,
-           endPoint.lat - startPoint.lat
-         ) *
-           180) /
-         Math.PI;
-       const htmlIconArrow4d = `<i class="fa fa-arrow-up" style="color:aqua; transform: rotate(${angle}deg); font-size: 24px;"></i>`;
- 
-       var arrowIcon4d = L.divIcon({
-         className: "arrow-marker",
-         html: htmlIconArrow4d,
-         iconSize: [24, 24],
-         iconAnchor: [12, 12],
-       });
- 
-       var marker4d = L.marker(startPoint, { icon: arrowIcon4d }).addTo(map);
-     }
+      [-7.894288, 110.049782],
+      [-7.892874, 110.050447],
+      [-7.891304, 110.05108],
+      [-7.889736, 110.051593],
+      [-7.887855, 110.052186],
+    ];
 
-     var arrowJalurEvakuasi9 = [
-      [-7.895806,	110.053303],
-      [-7.894548,	110.053832],
-      [-7.893530,	110.054298],
-      [-7.892498,	110.053444],
-      [-7.891599,	110.053457],
-      [-7.890781,	110.053744],
-      [-7.889676,	110.054281],
-      [-7.888854,	110.05461],
+    for (var i = 0; i < arrowJalurEvakuasi8.length - 1; i++) {
+      var startPoint = L.latLng(arrowJalurEvakuasi8[i]);
+      var endPoint = L.latLng(arrowJalurEvakuasi8[i + 1]);
 
-     ];
- 
-     for (var i = 0; i < arrowJalurEvakuasi9.length - 1; i++) {
-       var startPoint = L.latLng(arrowJalurEvakuasi9[i]);
-       var endPoint = L.latLng(arrowJalurEvakuasi9[i + 1]);
- 
-       var angle =
-         (Math.atan2(
-           endPoint.lng - startPoint.lng,
-           endPoint.lat - startPoint.lat
-         ) *
-           180) /
-         Math.PI;
-       const htmlIconArrow4e = `<i class="fa fa-arrow-up" style="color:DarkGoldenRod; transform: rotate(${angle}deg); font-size: 24px;"></i>`;
- 
-       var arrowIcon4e = L.divIcon({
-         className: "arrow-marker",
-         html: htmlIconArrow4e,
-         iconSize: [24, 24],
-         iconAnchor: [12, 12],
-       });
- 
-       var marker4e = L.marker(startPoint, { icon: arrowIcon4e }).addTo(map);
-     }
+      var angle =
+        (Math.atan2(
+          endPoint.lng - startPoint.lng,
+          endPoint.lat - startPoint.lat
+        ) *
+          180) /
+        Math.PI;
+      const htmlIconArrow4d = `<i class="fa fa-arrow-up" style="color:aqua; transform: rotate(${angle}deg); font-size: 24px;"></i>`;
 
-     
+      var arrowIcon4d = L.divIcon({
+        className: "arrow-marker",
+        html: htmlIconArrow4d,
+        iconSize: [24, 24],
+        iconAnchor: [12, 12],
+      });
 
+      var marker4d = L.marker(startPoint, { icon: arrowIcon4d }).addTo(map);
+    }
+
+    var arrowJalurEvakuasi9 = [
+      [-7.895806, 110.053303],
+      [-7.894548, 110.053832],
+      [-7.89353, 110.054298],
+      [-7.892498, 110.053444],
+      [-7.891599, 110.053457],
+      [-7.890781, 110.053744],
+      [-7.889676, 110.054281],
+      [-7.888854, 110.05461],
+    ];
+
+    for (var i = 0; i < arrowJalurEvakuasi9.length - 1; i++) {
+      var startPoint = L.latLng(arrowJalurEvakuasi9[i]);
+      var endPoint = L.latLng(arrowJalurEvakuasi9[i + 1]);
+
+      var angle =
+        (Math.atan2(
+          endPoint.lng - startPoint.lng,
+          endPoint.lat - startPoint.lat
+        ) *
+          180) /
+        Math.PI;
+      const htmlIconArrow4e = `<i class="fa fa-arrow-up" style="color:DarkGoldenRod; transform: rotate(${angle}deg); font-size: 24px;"></i>`;
+
+      var arrowIcon4e = L.divIcon({
+        className: "arrow-marker",
+        html: htmlIconArrow4e,
+        iconSize: [24, 24],
+        iconAnchor: [12, 12],
+      });
+
+      var marker4e = L.marker(startPoint, { icon: arrowIcon4e }).addTo(map);
+    }
 
     const htmlIconApotek =
       '<i class="fas fa-briefcase-medical" style="color:#9F000F; font-size: 28px;"></i>';
@@ -519,7 +510,7 @@ export const PetaJalurEvakuasi = () => {
       iconAnchor: [12, 12],
       popupAnchor: [12, 12],
     });
-    var markertea = L.marker([-7.868777,	110.061252], {
+    var markertea = L.marker([-7.868777, 110.061252], {
       icon: titikKumpullIcon,
     }).addTo(map);
 
@@ -550,14 +541,18 @@ export const PetaJalurEvakuasi = () => {
   return (
     <div className="relative flex flex-col w-screen h-screen">
       {!isLogged ? <NavbarBeforeLogin /> : <NavbarAfterLogin />}
-      <div className="flex flex-col items-center justify-center mt-24 mb-8 ">
+      <div className="flex flex-col items-center justify-center mt-24 mb-8 px-4">
         <h2 className="text-center font-righteous text-2xl md:text-3xl 2xl:text-[64px] text-center">
           Peta Rekomendasi Jalur Evakuasi
         </h2>
         <div className="absolute flex items-right justify-right right-8 mt-2 ">
-          <img className="w-40 h-40" src={kompas} alt="Kompas" />
+          <img
+            className="w-40 h-40 hidden xl:block"
+            src={kompas}
+            alt="Kompas"
+          />
         </div>
-        <p className="text-[15px] mt-[34px] italic text-[#9D9797] font-poppins">
+        <p className="text-[15px] mt-[34px] italic text-[#9D9797] font-poppins text-center">
           Zoom in atau Zoom out pada peta dengan tanda +- di pojok kiri atau
           dengan kursor untuk menyesuaikan ukuran peta
         </p>
@@ -565,7 +560,7 @@ export const PetaJalurEvakuasi = () => {
       <div id="map" className=" relative mt-2 w-full h-full z-10"></div>
       <img
         src={LegendaFix}
-        className="absolute inset-0 w-[279.48px] h-[330px] ml-[50px] mt-[450px] object-cover rounded-lg z-20"
+        className="absolute left-2 bottom-2 w-[124px] xl:w-[279.48px] xl:h-[330px] xl:ml-[50px] xl:mt-[450px] object-cover rounded-lg z-20"
       ></img>
     </div>
   );
