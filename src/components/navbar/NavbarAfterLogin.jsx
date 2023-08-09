@@ -59,9 +59,9 @@ export const NavbarAfterLogin = () => {
 
   useEffect(() => {
     if (!isAdmin) {
-      setMenu(menuAdmin);
-    } else {
       setMenu(menuUser);
+    } else {
+      setMenu(menuAdmin);
     }
   }, []);
 
