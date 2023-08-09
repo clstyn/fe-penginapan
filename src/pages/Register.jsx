@@ -173,6 +173,9 @@ export const Register = () => {
           {loading ? "Loading..." : "Masuk"}
         </span>
       </Link>
+      <Link to="/" className="text-c-light-cream text-xs mt-4 hover:underline">
+        Kembali
+      </Link>
     </div>
   );
 };
