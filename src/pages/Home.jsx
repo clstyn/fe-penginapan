@@ -107,7 +107,7 @@ export const Home = () => {
     <div className="">
       {!isLogged ? <NavbarBeforeLogin /> : <NavbarAfterLogin />}
 
-      <section className="bg-hero bg-cover min-h-screen flex items-center justify-center pt-36 md:pt-48 md:py-24 text-c-light-cream relative">
+      <section className="bg-hero bg-cover min-h-screen flex items-center justify-center pt-20 md:pt-48 md:py-24 text-c-light-cream relative">
         <div className="container mx-auto max-md:px-8 relative z-20 relative">
           <div className="flex flex-col items-center justify-center gap-8 md:gap-32 md:px-12">
             <h2 className="font-righteous text-2xl md:text-3xl 2xl:text-5xl text-center">
@@ -237,7 +237,7 @@ export const Home = () => {
         onClick={scrollToTop}
         className="fixed bg-c-dark-green hidden rounded-xl aspect-square w-8 xl:w-16 bottom-4 right-4 xl:bottom-16 xl:right-16 border-2 border-white hover:scale-110 transition z-50"
       >
-        <MdKeyboardArrowUp className="text-white text-4xl mx-auto" />
+        <MdKeyboardArrowUp className="text-white text-2xl xl:text-4xl mx-auto" />
       </button>
     </div>
   );

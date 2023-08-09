@@ -6,9 +6,18 @@ import { toast } from "react-toastify";
 import Dropdown from "../common/Dropdown";
 import { AppContext } from "../../context/AppContext";
 
+import { HiMenu, HiX } from "react-icons/hi";
+
 export const NavbarAfterLogin = () => {
+  const [navbarPhoneOpen, setNavbarPhoneOpen] = useState(false);
+  const [menu, setMenu] = useState();
+
   const [isAdmin, setIsAdmin] = useState(false);
   const { logout, userData } = useContext(AppContext);
+
+  const toggleNavbarPhone = () => {
+    setNavbarPhoneOpen(!navbarPhoneOpen);
+  };
 
   const handleLogout = () => {
     localStorage.clear();
@@ -47,6 +56,14 @@ export const NavbarAfterLogin = () => {
     { id: 2, value: "Peta Evakuasi", linkTo: "/maps-rekomendasi-evakuasi" },
     { id: 3, value: "Peta Titik Kumpul", linkTo: "/maps-rekomendasi-tikum" },
   ];
+
+  useEffect(() => {
+    if (!isAdmin) {
+      setMenu(menuAdmin);
+    } else {
+      setMenu(menuUser);
+    }
+  }, []);
 
   return (
     <nav
@@ -95,7 +112,7 @@ export const NavbarAfterLogin = () => {
             </Link>
           </li>
         </ul>
-        <div className="md:hidden">
+        {/* <div className="md:hidden">
           <div className="cursor-pointer">
             {!isAdmin ? (
               <Dropdown items={menuUser} />
@@ -103,7 +120,48 @@ export const NavbarAfterLogin = () => {
               <Dropdown items={menuAdmin} />
             )}
           </div>
+        </div> */}
+        <div
+          className={`md:hidden transition-all text-2xl relative navbar-phone-icon ${
+            navbarPhoneOpen ? "open" : ""
+          }`}
+          onClick={toggleNavbarPhone}
+        >
+          {navbarPhoneOpen ? <HiX /> : <HiMenu />}
         </div>
+        {navbarPhoneOpen ? (
+          <div
+            className={`absolute top-0 left-0 -z-10 w-full max-h-fit flex flex-col items-center justify-center bg-c-dark-green text-white pt-20 pb-4 navbar-menu ${
+              navbarPhoneOpen ? "open" : "closed"
+            }`}
+          >
+            {menu?.map((item) => {
+              if (item.value === "LOGOUT") {
+                return (
+                  <Link
+                    key={item.id}
+                    className="font-poppins py-4 hover:font-bold"
+                    to={item.linkTo}
+                    onClick={handleLogout}
+                  >
+                    {item.value}
+                  </Link>
+                );
+              } else {
+                return (
+                  <Link
+                    key={item.id}
+                    className="font-poppins py-4 hover:font-bold"
+                    to={item.linkTo}
+                    onClick={() => setNavbarPhoneOpen(false)}
+                  >
+                    {item.value}
+                  </Link>
+                );
+              }
+            })}
+          </div>
+        ) : null}
       </div>
     </nav>
   );

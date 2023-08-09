@@ -69,19 +69,24 @@ export const NavbarBeforeLogin = () => {
           {navbarPhoneOpen ? <HiX /> : <HiMenu />}
         </div>
         {navbarPhoneOpen ? (
-          <ul
+          <div
             className={`absolute top-0 left-0 -z-10 w-full max-h-fit flex flex-col items-center justify-center bg-c-dark-green text-white pt-20 pb-4 navbar-menu ${
               navbarPhoneOpen ? "open" : "closed"
             }`}
           >
             {menuNormal.map((item) => {
               return (
-                <li key={item.id} className="font-poppins py-4">
+                <Link
+                  key={item.id}
+                  className="font-poppins py-4 hover:font-bold"
+                  to={item.linkTo}
+                  onClick={() => setNavbarPhoneOpen(false)}
+                >
                   {item.value}
-                </li>
+                </Link>
               );
             })}
-          </ul>
+          </div>
         ) : null}
       </div>
     </nav>

@@ -63,30 +63,30 @@ export const PetaPenginapan = () => {
   return (
     <div className="">
       {!isLogged ? <NavbarBeforeLogin /> : <NavbarAfterLogin />}
-      <div className="flex flex-col">
+      <div className="flex flex-col justify-center">
         <div>
-          <p className="text-5xl mt-[115px] text-center font-semibold font-poppins">
+          <p className="text-2xl xl:text-5xl mt-[115px] text-center font-semibold font-poppins">
             Peta Interaktif Daftar Penginapan
           </p>
         </div>
         <div>
-          <p className="text-[15px] mt-[50px] ml-[277px] italic text-[#9D9797] font-poppins">
+          <p className="text-sm xl:text-[15px] mt-8 xl:mt-[50px] mx-8 xl:ml-[277px] italic text-[#9D9797] font-poppins text-center">
             Zoom in atau Zoom out pada peta dengan tanda +- di pojok kiri atau
             dengan kursor untuk menyesuaikan ukuran peta
           </p>
         </div>
         <img
           src="img/image 7.png"
-          className="absolute h-[198px] w-[216px] mt-[125px] ml-[2030px] "
+          className="absolute h-[198px] w-[216px] mt-[125px] ml-[2030px] hidden xl:block"
         ></img>
         <div className="relative">
           <div
             id="map"
-            className="w-[1692.6px] h-[830.8px] mt-[5px] ml-[276px] mr-[276px] rounded-lg z-10"
+            className="w-[320.15px] h-[350.8px] xl:w-[1692.6px] xl:h-[830.8px] mt-[5px] xl:ml-[276px] xl:mr-[276px] rounded-lg z-10 mx-auto relative"
           ></div>
           <img
             src="img/Group 24.png"
-            className="absolute inset-0 w-[314px] h-[205px] ml-[315px] mt-[595px] object-cover rounded-lg z-20"
+            className="absolute inset-0 w-[124px] xl:w-[314px] xl:h-[205px] xl:ml-[315px] xl:mt-[595px] object-cover rounded-lg z-20 max-xl:top-56 max-xl:left-8"
           ></img>
         </div>
       </div>

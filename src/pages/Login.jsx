@@ -62,7 +62,7 @@ export const Login = () => {
 
   return (
     <div className="w-screen min-h-screen bg-c-dark-green flex flex-col items-center justify-center font-poppins">
-      <form className="flex flex-col items-center jusityf-center w-5/6 md:w-3/5 gap-8">
+      <form className="flex flex-col items-center justify-center w-5/6 md:w-3/5 gap-2 md:gap-8">
         <h1 className="text-c-cream font-semibold text-2xl md:text-4xl 2xl:text-[64px] mb-2 md:mb-8">
           Masuk
         </h1>
@@ -106,6 +106,9 @@ export const Login = () => {
       </form>
       <Link to="/register" className="text-c-light-cream">
         Belum punya akun? <span className="hover:underline">Daftar</span>
+      </Link>
+      <Link to="/" className="text-c-light-cream text-xs mt-4 hover:underline">
+        Kembali
       </Link>
     </div>
   );
