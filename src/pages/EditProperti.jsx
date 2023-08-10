@@ -311,7 +311,7 @@ export const EditProperti = () => {
               id="fasilitas"
               className="border border-gray-300 px-4 py-2 w-full rounded"
               name="fasilitas"
-              value={property.fasilitas.join(". ")}
+              value={property.fasilitas.join(", ")}
               onChange={handleChange}
             />
           </div>
