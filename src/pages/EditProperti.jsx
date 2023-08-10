@@ -340,7 +340,7 @@ export const EditProperti = () => {
             </label>
             <div
               id="map"
-              className="border border-gray-300 px-4 py-2 w-full h-16 md:h-[240px] rounded"
+              className="border border-gray-300 px-4 py-2 w-full h-[240px] rounded"
             ></div>
           </div>
           <div className="flex justify-end mt-8">

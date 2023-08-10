@@ -164,14 +164,11 @@ export const Register = () => {
           onClick={handleSubmit}
           className="w-full xl:w-1/2 font-semibold text-c-dark-green text-xl md:text-2xl xl:text-3xl bg-c-light-green rounded-lg pl-3 py-2 md:pl-6 md:py-4 hover:bg-c-light-cream my-4"
         >
-          Daftar
+          {loading ? "Loading..." : "Daftar"}
         </button>
       </form>
       <Link to="/register" className="text-c-light-cream">
-        Sudah punya akun?{" "}
-        <span className="hover:underline">
-          {loading ? "Loading..." : "Masuk"}
-        </span>
+        Sudah punya akun? <span className="hover:underline">Masuk</span>
       </Link>
       <Link to="/" className="text-c-light-cream text-xs mt-4 hover:underline">
         Kembali
