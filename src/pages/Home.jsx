@@ -199,11 +199,7 @@ export const Home = () => {
               className="w-full py-2 pl-10 pr-0 md:pr-10 border border-gray-300 rounded-md outline-none text-sm md:text-lg focus:border-c-dark-green pl-12"
             />
           </div>
-          <div
-            className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 w-full md:mt-12"
-            data-aos="fade-up"
-            data-aos-duration="3000"
-          >
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 w-full md:mt-12">
             {loading ? (
               <p className="col-span-full">Mengambil Data...</p>
             ) : null}
@@ -235,7 +231,7 @@ export const Home = () => {
       <button
         id="toTopButton"
         onClick={scrollToTop}
-        className="fixed bg-c-dark-green hidden rounded-xl aspect-square w-8 xl:w-16 bottom-4 right-4 xl:bottom-16 xl:right-16 border-2 border-white hover:scale-110 transition z-50"
+        className="fixed bg-c-dark-green hidden rounded-xl aspect-square w-8 xl:w-16 bottom-4 right-4 xl:bottom-16 xl:right-16 border-2 border-white hover:scale-110 transition z-40"
       >
         <MdKeyboardArrowUp className="text-white text-2xl xl:text-4xl mx-auto" />
       </button>
